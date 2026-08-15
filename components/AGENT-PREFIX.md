@@ -1,6 +1,9 @@
 # AGENT-PREFIX — the 160x TTFT lever on Qwen3.8-27B @ NUCBox
 
-Measured 2026-08-15 (96k ctx, draft-mtp,ngram-mod n12 n-min 24):
+Measured 2026-08-15 on the Q4_K_XL@96k champion config (draft-mtp,ngram-mod
+n12 n-min 24). PP is kernel-bound and spec-independent (~390 tok/s ceiling,
+~232 at 43k ctx), so these bands carry to the current Q3_K_XL@128k champion;
+re-measure if you depend on exact warm numbers.
 
 | scenario | TTFT (16k-token prompt) |
 |---|---|
@@ -44,6 +47,6 @@ mutating the prefix — fix the client, not the server.
 
 ## Why not --cache-ram / --cache-reuse?
 `--cache-reuse` is a no-op on this build ("not supported by this context").
-`--cache-ram` (default 8192 MiB) already covers the full 96k slot KV (~6.3GB);
-raising it buys nothing and eats UMA (known trap). The in-slot cache needs no
-flags at all.
+`--cache-ram` (default 8192 MiB) covers the 96k slot KV (~6.3GB; a 128k slot is
+~8.4GB at ~2.1GB per 32k). Raising it is the known UMA trap on this box — the
+in-slot cache needs no flags at all.
