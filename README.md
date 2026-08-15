@@ -1,6 +1,6 @@
 # Qwen3.8-27B on Strix Halo — tuned serving profile
 
-First-mover measured configuration for serving **Qwen3.8-27B** (Apache-2.0, released 2026-08-14)
+Fully measured configuration for serving **Qwen3.8-27B** (Apache-2.0, released 2026-08-14)
 on **AMD Strix Halo** (Ryzen AI Max+ 395, Radeon 8060S, unified LPDDR5X, GTT 64GB) with
 **llama.cpp** — speculation-stacked to the practical frontier of this silicon.
 
