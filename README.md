@@ -4,8 +4,10 @@ Fully measured configuration for serving **Qwen3.8-27B** (Apache-2.0, released 2
 on **AMD Strix Halo** (Ryzen AI Max+ 395, Radeon 8060S, unified LPDDR5X, GTT 64GB) with
 **llama.cpp** — speculation-stacked to the practical frontier of this silicon.
 
-Current champion (production since 2026-08-15 19:10Z): **UD-Q3_K_XL @ 128k context**.
-The AM publication ran UD-Q4_K_XL @ 96k; the quant ladder closed same day — see findings.
+Current champion (production, restored 2026-08-15 19:36Z): **UD-Q4_K_XL @ 96k context**.
+Q3_K_XL @ 128k was swapped in at 19:10Z and reverted the same hour — the quant ladder
+(Q4 → Q3 → Q2) closed on **time-per-task**, not decode tok/s. See findings: that reversal
+is the most useful result in this repo.
 
 ## The numbers (measured 2026-08-15, single box, reproducible via `components/bench/`)
 
@@ -18,17 +20,19 @@ count-to-30 bench, cold = first exposure, warm = back-to-back repeats:
 | MTP n=9 | 55.7 | — | 32k |
 | MTP n=9 + ngram-mod | 54.6 | 89.6-92.3 | 96k |
 | MTP n=12 + ngram-mod | 59.4 | 94.7-98.5 | 96k |
-| … n-min 24 — Q4_K_XL champion (AM version) | 59.7 | 148-158 | 96k (f16 KV) |
-| **… swapped to Q3_K_XL @ 128k — this repo** | **63-64** | **148-161** | **128k (f16 KV)** |
+| **… n-min 24, Q4_K_XL — this repo (champion)** | **59.7** | **148-158** | **96k (f16 KV)** |
+| Q3_K_XL swap @ 128k (in 19:10Z, reverted 19:36Z) | 63-64 | 148-161 | 128k |
 | Q2_K_XL (rejected — see findings) | 54.7 | 134-153 | 128k |
 
-GTT after swap: 52.7/64GB (11.3GB margin; Q4@96k ran 8.2GB).
+GTT on the champion: ~54.8/64GB (9.2GB margin). Note the trap this table hides: Q3
+decodes faster than Q4 yet finishes identical correct tasks 35-50% slower — read the
+time-per-task ladder in findings before picking a quant.
 
 ## Read the warm numbers honestly (three bands)
 
-- **Cold c30 63-64 tok/s** — what a one-shot query actually feels. ngram adds zero
-  overhead when it misses; cold speed never regressed from stacking.
-- **Warm c30 148-161 tok/s — a repetitive-bench artifact.** ngram speculation replays
+- **Cold c30 59.7 tok/s** (63-64 on the Q3@128k option) — what a one-shot query actually
+  feels. ngram adds zero overhead when it misses; cold speed never regressed from stacking.
+- **Warm c30 148-158 tok/s — a repetitive-bench artifact.** ngram speculation replays
   repeated structure across back-to-back identical runs. In production it only appears
   on genuinely repetitive output: agent tool loops and echoed-file rewrites (72-133 tok/s).
 - **Real conversational traffic: 11-24 tok/s** — creative long-form ~11-14, a 2000-token
@@ -44,14 +48,17 @@ First-token: 0.2-0.6s warm prefix, ~41s for a cold 16k-token prompt (PP kernel-b
 2. Serve with `components/qwen38-27b-halo-mtp.ini` flags on llama.cpp **b10435+**:
 
 ```bash
-llama-server -m Qwen3.8-27B-UD-Q3_K_XL.gguf -ngl 99 -c 131072 \
+llama-server -m Qwen3.8-27B-UD-Q4_K_XL.gguf -ngl 99 -c 98304 \
   --flash-attn on --jinja --parallel 1 --threads 16 -fit off --no-ui \
   --spec-type draft-mtp,ngram-mod --spec-draft-n-max 12 --spec-ngram-mod-n-min 24 \
   --chat-template-kwargs '{"enable_thinking": false}'
 ```
 
-3. Higher-fidelity fallback: the same flags with `UD-Q4_K_XL.gguf -c 98304`
-   (59.7 / 148-158; 8.2GB GTT margin).
+3. Context-hungry option: the same flags with `UD-Q3_K_XL.gguf -c 131072`
+   (63-64 cold / 148-161 warm, +33% context, 11.3GB margin) — but Q3's thinking runs
+   ~2x more verbose on code/reasoning, so identical correct tasks complete 35-50%
+   slower (7.6-7.7s vs 10.6-16.1s per task). Choose it only when context, not
+   latency, is the binding constraint.
 4. Optional stanzas in the ini: creative profile (`--spec-draft-p-min 0.75`,
    +27% long-form at ~10% code cost), saturated (mtp-only A/B variant).
 
@@ -72,9 +79,11 @@ llama-server -m Qwen3.8-27B-UD-Q3_K_XL.gguf -ngl 99 -c 131072 \
 - **ngram-mod + MTP is the Strix Halo pattern**: ngram drafts cost zero bandwidth (prompt-
   derived) and stack losslessly (target-verified) on top of MTP heads. Full flag map,
   including the dead ends (n16, n-min below 24, p-split), is in findings.
-- **The quant knee is Q3_K_XL**: Q4 → Q3 is faster AND 4GB lighter (less weight traffic),
-  funding 128k context at an 11.3GB margin; Q2_K is *slower* than both (dequant kernel
-  cost exceeds the bandwidth saved) with 30-40% more verbose thinking. Ladder closed.
+- **The quant ladder is closed — on time-per-task, not decode tok/s**: Q3@128k decodes
+  faster than Q4 (63-64 vs 59.7 cold c30) yet completes identical correct tasks 35-50%
+  slower, because its thinking is ~2x more verbose; Q2 loses on both axes (dequant
+  kernel cost exceeds the bandwidth saved) with 30-40% more verbose thinking. Decode
+  tok/s is not task latency — token verbosity dominates. Full three-quant table in findings.
 - **Neural drafters LOSE on this chip**: DSpark (1.36B) and DFlash drafters compete for the
   same memory bus as the 27B verifier — acceptance 0.91-0.94 still nets ~32 tok/s. They're
   compute-rich-GPU plays, not unified-memory plays.
@@ -82,8 +91,8 @@ llama-server -m Qwen3.8-27B-UD-Q3_K_XL.gguf -ngl 99 -c 131072 \
   weak spot), Vulkan for spec-decode workloads (~half throughput vs ROCm here), KV-quant
   q8 with FA (load failure on ROCm builds).
 - **Context is nearly free**: ~2.1GB KV per 32k on this GQA model — 128k runs at zero
-  speed cost. That is why the Q3 swap bought context instead of speed.
-- **Quality-gated at every step**: 6/6 suite on the Q3@128k champion (palindrome needs a
+  speed cost. The Q3 revert was a verbosity verdict, not a capacity one.
+- **Quality-gated at every step**: 6/6 suite on every promoted config (palindrome needs a
   1200-token budget — thinking eats fixed budgets; known artifact, recovers clean),
   43k-token deep-context needle probes show stacked spec == spec-off (no KV corruption),
   agentic soak 41/41 on the champion stack + 20/20 on the quant-ladder arms.

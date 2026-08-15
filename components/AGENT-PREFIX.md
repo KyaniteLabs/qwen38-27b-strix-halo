@@ -1,9 +1,9 @@
 # AGENT-PREFIX — the 160x TTFT lever on Qwen3.8-27B @ NUCBox
 
-Measured 2026-08-15 on the Q4_K_XL@96k champion config (draft-mtp,ngram-mod
+Measured 2026-08-15 on the champion config (Q4_K_XL@96k, draft-mtp,ngram-mod
 n12 n-min 24). PP is kernel-bound and spec-independent (~390 tok/s ceiling,
-~232 at 43k ctx), so these bands carry to the current Q3_K_XL@128k champion;
-re-measure if you depend on exact warm numbers.
+~232 at 43k ctx), so the bands carry across quant/context choices in this
+family; re-measure if you depend on exact warm numbers.
 
 | scenario | TTFT (16k-token prompt) |
 |---|---|

@@ -3,9 +3,10 @@
 # (gfx1151 / Ryzen AI Max 395, GTT-backed UMA). Sourced before llama-server.
 #
 # Validated in production 2026-08-15 (qwen27.service, NUCBox):
-#   Qwen3.8-27B UD-Q3_K_XL, -ngl 99, FA on, draft-mtp,ngram-mod n=12 n-min 24, -c 131072
-#   c30 63-64 cold / 148-161 ngram-warm tok/s · GTT 52.7/64GB · 11.3GB margin
-#   (AM-era validation: UD-Q4_K_XL @ 98304, 59.7 cold / 148-158 warm, 8.2GB margin)
+#   Qwen3.8-27B UD-Q4_K_XL, -ngl 99, FA on, draft-mtp,ngram-mod n=12 n-min 24, -c 98304
+#   c30 59.7 cold / 148-158 ngram-warm tok/s · GTT ~54.8/64GB · 9.2GB margin
+#   19:10-19:36Z: Q3_K_XL @ 131072 trialed and REVERTED — time-per-task favors Q4
+#   (Q3 decodes faster but thinks ~2x longer: 10.6-16.1s vs 7.6-7.7s per task)
 #
 # Lines marked "optional" are race/hang guards from community reports; the
 # production unit ships only the two mandatory lines (keep the diff small).

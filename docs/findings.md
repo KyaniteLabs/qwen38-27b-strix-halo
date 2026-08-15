@@ -1,18 +1,34 @@
 # Findings: what we measured so you don't have to
 
-## The quant knee is Q3_K_XL (2026-08-15 evening, ladder closed)
-- Q4_K_XL @ 96k: 59.7 cold / 148-158 warm, GTT margin 8.2GB (the AM champion).
-- Q3_K_XL @ 128k: 63.0-64.0 cold / 148.0-161.6 warm, margin 11.3GB — faster AND 4GB
-  lighter AND +33% context. Quality 6/6 (palindrome truncated at a 500-token budget —
-  thinking ate 1678 chars; full working output at 1200, `finish=stop`). Swapped into
-  production 19:10Z. Dequant cost < bandwidth saved: Q3 weights are simply less traffic.
-- Q2_K_XL @ 128k: 54.7 cold / 134.3-152.6 warm — SLOWER than both Q3 and Q4 despite
-  2.6GB less weights (Q2_K dequant kernels cost more than the bandwidth saved; negative
-  return on the very axis compression is supposed to win). Margin only +2.4GB vs Q3.
-  Reasoning 30-40% more verbose for the same problems: code prompt emitted ZERO content
-  at a 500-token budget (thinking 1958 chars), recovers at 1200; strict-JSON probe
-  perfect; 20-round agentic soak 20/20 clean. Gate passed formally, premise failed
-  materially — REJECTED, quant lane closed.
+## The quant ladder is closed — on time-per-task, not decode tok/s (2026-08-15 evening)
+Q3@128k was swapped into production at 19:10Z (faster decode, +33% context, 6/6 suite)
+and REVERTED at 19:36Z after a time-per-task battery (5 auto-graded tasks, wall-clock +
+completion tokens) showed thinking verbosity, not decode speed, decides task latency.
+
+| | Q4_K_XL @ 96k (champion) | Q3_K_XL @ 128k | Q2_K_XL @ 128k |
+|---|---|---|---|
+| c30 tok/s (cold / warm) | 59.7 / 148-158 | 63-64 / 148-161 | 54.7 / 134-153 |
+| GTT margin | 9.2GB | 11.3GB | 13.8GB |
+| quality suite | 6/6 | 6/6 | 5/6 |
+| agentic soak | 41/41 | — | 20/20 |
+| time-per-task (s @ tokens) | 7.6-7.7 @ ~170 | 10.6-16.1 @ 238-302 | not run (rejected on speed) |
+| code-task tokens, 3 runs | 402 / 450 | 705 / 740 / 994 | zero content @ 500 budget |
+| draft acceptance (novel traffic) | 0.345 | 0.492 | 0.478 |
+
+- Q3's thinking runs ~2x more verbose on code/reasoning, so Q4 completes identical
+  correct tasks 35-50% faster despite lower decode tok/s. **Decode tok/s is not task
+  latency; token verbosity dominates** — measure wall-clock per completed task, always.
+- Acceptance-collapse hypothesis FALSIFIED: Q3 novel-traffic acceptance (0.492) is
+  HIGHER than Q4's (0.345). The revert is purely a verbosity/latency verdict, not a
+  spec-decode failure — Q3 spec-decodes beautifully and still loses the clock.
+- Q2 additionally loses on raw decode (Q2_K dequant kernels cost more than the 2.6GB
+  bandwidth saved) and thinks 30-40% more: zero content at a 500-token budget (thinking
+  1958 chars), full correct output at 1200; strict-JSON probe perfect. Gate passed
+  formally, premise failed materially.
+- Q3 also passed 6/6 (palindrome needs the 1200-token budget; recovers `finish=stop`),
+  so this is NOT a quality cliff — it is a latency economics result.
+- Champion: Q4_K_XL @ 98304, restored and verified on production 19:36Z.
+  Q3@128k remains the documented context-hungry option when latency is not binding.
 
 ## Flag map: dead ends measured once, don't re-run (2026-08-15)
 - `--spec-draft-n-max 16`: code regresses to 21.3 tok/s (deep-draft waste returns). n12 is the peak.
