@@ -7,7 +7,7 @@ completion tokens) showed thinking verbosity, not decode speed, decides task lat
 
 | | Q4_K_XL @ 96k (champion) | Q3_K_XL @ 128k | Q2_K_XL @ 128k |
 |---|---|---|---|
-| c30 tok/s (cold / warm) | 59.7 / 148-158 | 63-64 / 148-161 | 54.7 / 134-153 |
+| c30 tok/s (cold / warm) | 59.7 / 148-163 | 63-64 / 148-163 | 54.7 / 134-153 |
 | GTT margin | 9.2GB | 11.3GB | 13.8GB |
 | quality suite | 6/6 | 6/6 | 5/6 |
 | agentic soak | 41/41 | — | 20/20 |
@@ -42,6 +42,26 @@ completion tokens) showed thinking verbosity, not decode speed, decides task lat
 - `--spec-draft-p-min 0.75`: NOT a default (c30 -2%, code -10%) but story +27% / acceptance
   0.21→0.74 on creative long-form — shipped as the ini's creative stanza.
 
+## Wave 2 — context engineering, measured (2026-08-15 night)
+Serving-side speed hit physics; the harness side paid better. Honesty rule for this
+section: single-run A/Bs carry variance — the sustained (n>=3) numbers are the headline.
+
+- **Think-style steering, fused caveman+ponytail** (`bench/tpt-style.py`, 4 arms):
+  **-36% tokens / -33% task time sustained** (n=3 vs n=8 baseline); live single-run
+  A/B **-51% wall** (variance-colored, not the headline). Philosophy: caveman = terse
+  reasoning fragments; ponytail = lazy-senior-dev JUDGMENT — the does-it-need-to-exist
+  → stdlib → one-line ladder; small fix beats big fix. Steering not caps: the owner
+  veto on budget caps is a feature of the design (the model chooses how little to
+  think; nothing forbids thinking).
+- **`read_symbol` + `code_graph` semantic navigation**: exploration task 48.6s /
+  13,917B tool output / 53.5KB prompts vs 22.6s / 276B / 4.9KB = **-98% tool tokens**.
+- **Tool-result diet**: identical-output dedup stubs **-66%** on re-check loops;
+  progressive disclosure + spill files; diff-hunk edit evidence with parse verdicts.
+- **Summary-node compaction** past 300 events.
+- **Wave-regression law + 68→70-check in-repo test suite**, including the
+  glass-contract tests born from a real crash.
+- **Parallel-tool advertisement** (batch calls instead of serializing).
+
 ## Neural drafters lose on unified memory (2026-08-15, 4-arm A/B, mirror-validated)
 - DSpark 1.36B BF16 drafter (RadixArk, GGUF converted via patched convert_hf_to_gguf DSpark path): 32.6 cold / 150.9 warm vs champion 59.6/157.8-158.3 — loses everywhere.
 - Mechanism: drafter forward pass costs ~2.7GB reads on the SAME bus as the 27B verify pass; acceptance 0.91 x 7-len still nets ~32 tok/s. ngram drafts are free (prompt-derived) with len 37.7.
@@ -56,3 +76,4 @@ completion tokens) showed thinking verbosity, not decode speed, decides task lat
 ## Quality gates used
 - 6-prompt fixed suite (riddle/code/precision/explain/persona/multistep), >=3 bench runs, draft-acceptance from server journal, deep-context needle probes at 43k (spec-on identical to spec-off = no KV corruption), agentic tool-loop soak (41/41 on the champion stack, 20/20 on quant-ladder arms).
 - Thermal note: sustained ~4s-cadence agent load rides the GPU edge at 92C (boost-throttle operating point, recovers 92→61C in 45s; no heat soak).
+- EC fan control on the same box (~1-1.3°C delta under load): see [evo-x2-ec, pending publication].
