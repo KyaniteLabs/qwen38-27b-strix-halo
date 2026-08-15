@@ -20,8 +20,8 @@ count-to-30 bench, cold = first exposure, warm = back-to-back repeats:
 | MTP n=9 | 55.7 | — | 32k |
 | MTP n=9 + ngram-mod | 54.6 | 89.6-92.3 | 96k |
 | MTP n=12 + ngram-mod | 59.4 | 94.7-98.5 | 96k |
-| **… n-min 24, Q4_K_XL — this repo (champion)** | **59.7** | **148-158** | **96k (f16 KV)** |
-| Q3_K_XL swap @ 128k (in 19:10Z, reverted 19:36Z) | 63-64 | 148-161 | 128k |
+| **… n-min 24, Q4_K_XL — this repo (champion)** | **59.7** | **148-163** | **96k (f16 KV)** |
+| Q3_K_XL swap @ 128k (in 19:10Z, reverted 19:36Z) | 63-64 | 148-163 | 128k |
 | Q2_K_XL (rejected — see findings) | 54.7 | 134-153 | 128k |
 
 GTT on the champion: ~54.8/64GB (9.2GB margin). Note the trap this table hides: Q3
@@ -32,7 +32,7 @@ time-per-task ladder in findings before picking a quant.
 
 - **Cold c30 59.7 tok/s** (63-64 on the Q3@128k option) — what a one-shot query actually
   feels. ngram adds zero overhead when it misses; cold speed never regressed from stacking.
-- **Warm c30 148-158 tok/s — a repetitive-bench artifact.** ngram speculation replays
+- **Warm c30 148-163 tok/s — a repetitive-bench artifact.** ngram speculation replays
   repeated structure across back-to-back identical runs. In production it only appears
   on genuinely repetitive output: agent tool loops and echoed-file rewrites (72-133 tok/s).
 - **Real conversational traffic: 11-24 tok/s** — creative long-form ~11-14, a 2000-token
@@ -55,7 +55,7 @@ llama-server -m Qwen3.8-27B-UD-Q4_K_XL.gguf -ngl 99 -c 98304 \
 ```
 
 3. Context-hungry option: the same flags with `UD-Q3_K_XL.gguf -c 131072`
-   (63-64 cold / 148-161 warm, +33% context, 11.3GB margin) — but Q3's thinking runs
+   (63-64 cold / 148-163 warm, +33% context, 11.3GB margin) — but Q3's thinking runs
    ~2x more verbose on code/reasoning, so identical correct tasks complete 35-50%
    slower (7.6-7.7s vs 10.6-16.1s per task). Choose it only when context, not
    latency, is the binding constraint.
@@ -69,7 +69,9 @@ llama-server -m Qwen3.8-27B-UD-Q4_K_XL.gguf -ngl 99 -c 98304 \
 - `components/AGENT-PREFIX.md` — byte-stable agent prefix doctrine (the real TTFT lever:
   warm prefix = 160x faster than cold)
 - `components/bench/` — the bench suite (throughput, quality suite, TTFT, deep-ctx
-  needle tests, rewrite-generator). Draft-acceptance metrics are read from the server
+  needle tests, rewrite-generator) plus the time-per-task instruments: `tpt-battery.py`
+  (5 auto-graded tasks; the tool behind the quant-ladder verdict) and `tpt-style.py`
+  (4-arm style A/B runner). Draft-acceptance metrics are read from the server
   journal (`journalctl -u qwen27 | grep acceptance`; warm c30 shows mean-len ~37.7,
   acceptance ~0.96).
 - `docs/findings.md` — the negative results that saved us time (read before experimenting)
@@ -96,6 +98,35 @@ llama-server -m Qwen3.8-27B-UD-Q4_K_XL.gguf -ngl 99 -c 98304 \
   1200-token budget — thinking eats fixed budgets; known artifact, recovers clean),
   43k-token deep-context needle probes show stacked spec == spec-off (no KV corruption),
   agentic soak 41/41 on the champion stack + 20/20 on the quant-ladder arms.
+
+## Wave 2 — context engineering (the harness side)
+
+Decode tok/s ran into memory-bandwidth physics, so the second arc attacked what the
+model *reads* and how long it *thinks*. Measured tonight on the champion config;
+single-run A/Bs carry variance — the sustained numbers are the headline.
+
+- **Think-style steering (fused caveman+ponytail)**: a system prompt that steers the
+  model's internal reasoning style. Sustained **-36% tokens / -33% task time**
+  (n=3 vs n=8 baseline); a live single-run A/B showed **-51% wall** (single-run —
+  treat as variance-colored, not the headline). Philosophy: caveman = terse reasoning
+  ("finding / fix / next"); ponytail = lazy-senior-dev judgment — the
+  does-it-need-to-exist → stdlib → one-line ladder, small fix beats big fix. Steering,
+  never caps: the owner's standing veto on token-budget caps is a design feature —
+  the model decides how little to think, not when it is forbidden from thinking.
+- **Semantic navigation (`read_symbol` + `code_graph`)**: exploration task 48.6s /
+  13,917B tool output / 53.5KB prompts (read-everything style) vs 22.6s / 276B /
+  4.9KB — **-98% tool tokens** at roughly half the wall time.
+- **Tool-result diet**: identical-output dedup stubs (**-66%** tokens on re-check
+  loops), progressive disclosure with spill files, diff-hunk edit evidence with parse
+  verdicts.
+- **Context hygiene**: summary-node compaction past 300 events; parallel-tool
+  advertisement so the model batches calls instead of serializing them.
+- **Wave-regression law**: every wave lands with tests pinning the previous waves'
+  gains — the in-repo suite grew 68→70 checks, including glass-contract tests born
+  from a real crash.
+
+Instruments: `components/bench/tpt-battery.py` and `tpt-style.py` reproduce all of
+the above against any endpoint.
 
 ## License
 
