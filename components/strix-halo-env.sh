@@ -3,8 +3,9 @@
 # (gfx1151 / Ryzen AI Max 395, GTT-backed UMA). Sourced before llama-server.
 #
 # Validated in production 2026-08-15 (qwen27.service, NUCBox):
-#   Qwen3.8-27B UD-Q4_K_XL, -ngl 99, FA on, draft-mtp,ngram-mod n=12, -c 98304
-#   c30 59.4 cold / 98.5 ngram-warm tok/s · GTT 55.8/64GB · 8.2GB margin
+#   Qwen3.8-27B UD-Q3_K_XL, -ngl 99, FA on, draft-mtp,ngram-mod n=12 n-min 24, -c 131072
+#   c30 63-64 cold / 148-161 ngram-warm tok/s · GTT 52.7/64GB · 11.3GB margin
+#   (AM-era validation: UD-Q4_K_XL @ 98304, 59.7 cold / 148-158 warm, 8.2GB margin)
 #
 # Lines marked "optional" are race/hang guards from community reports; the
 # production unit ships only the two mandatory lines (keep the diff small).

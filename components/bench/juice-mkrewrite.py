@@ -1,3 +1,8 @@
+# juice-mkrewrite.py — writes the 150-handler rewrite prompt to /tmp.
+# Pair with the throughput bench to reproduce the ledger's rewrite numbers
+# (72-133 tok/s on the champion stack vs ~42 mtp-only):
+#   python3 juice-mkrewrite.py
+#   python3 qwen27-bench.py "$(cat /tmp/juice-rewrite-prompt.txt)" [port]
 lines = []
 for i in range(1, 151):
     lines.append(f"def handler_{i}(state, payload):")
