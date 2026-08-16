@@ -5,6 +5,27 @@ on **AMD Strix Halo** (Ryzen AI Max+ 395, Radeon 8060S, unified LPDDR5X, GTT 64G
 **llama.cpp** — speculation-stacked to the practical frontier of this silicon.
 
 Current champion (production, restored 2026-08-15 19:36Z): **UD-Q4_K_XL @ 96k context**.
+
+## UPDATE 2026-08-16 — champion advanced to the NATIVE CEILING: 262k context
+
+Same hardware, same quant, three more gates passed in one night (ladder
+96k → 160k → 192k → 262k, each A/B-tested on the real-task battery):
+
+| Config | cold c30 | warm c30 | tpt battery | context |
+|---|---|---|---|---|
+| **NEW champion: Q4_K_XL + K+V q8_0 KV cache** | ~52-57 | **150-158 (band held)** | 6.8-12.9 s/task, 5/5 | **262,144 (native max)** |
+| prior champion (row above) | 59.7 | 148-163 | 7.6-7.7 | 96k (f16 KV) |
+
+The whole gain comes from KV-cache quantization (K+V q8_0 — KV halves, so
+262k of q8 KV fits in LESS memory than 96k of f16). One labeled cost:
+prefill ~299 tok/s vs ~390 on f16 KV (q8 dequant on cache reads; bigger
+ubatch made it worse, not better). Time-per-task on real traces: unchanged
+to faster. Measured, not estimated — every rung had a pre-registered gate
+and the rollback unit stays in the RUNBOOK.
+
+Also that night: spec-decode params swept (champion n12/n-min24 stands),
+thermal un-capped (fan daemon owns dissipation), and a tool-position/
+salience finding published upstream: ggml-org/llama.cpp#27165.
 Q3_K_XL @ 128k was swapped in at 19:10Z and reverted the same hour — the quant ladder
 (Q4 → Q3 → Q2) closed on **time-per-task**, not decode tok/s. See findings: that reversal
 is the most useful result in this repo.
