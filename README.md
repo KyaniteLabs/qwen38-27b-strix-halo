@@ -159,6 +159,51 @@ time-per-task:            (tpt-battery, n>=3, one thermal window)
 source-link:
 ```
 
+## Re-baseline update (2026-08-16)
+
+Our own validity audit flagged two Wave-2 numbers as tainted, so every
+directional number was re-measured on a fixed, fingerprinted harness
+(liam-core 9fa358b; J-EV ledger fingerprint on every run; sequential runs).
+The re-baseline cut both ways — one correction upgraded our claim, one
+downgraded it — and both are recorded here. Everything above stands as
+published history with its original labels (no-retract protocol). Source:
+re-baseline experiment log (REBASELINE-RESULTS.md + VALIDITY-MAP.md,
+2026-08-15/16 night).
+
+- **Semantic reads (MUNCH): wall −65%, clean — bigger than we first claimed.**
+  n=3/arm interleaved, 6/6 correct answers: wall median 27.9s → 9.8s
+  (fingerprint 9fa358b). This supersedes the directional "roughly half the
+  wall time" label in Wave 2 above. Byte deltas revise to −95% tool_result
+  (5,182B → 277B) and −64% prompt_max (9,308B → 3,389B): W4 progressive
+  disclosure truncates the vanilla arm's `read_file` to ~5KB, so these are
+  the current-stack honest numbers (the earlier −98%/−91% were measured
+  pre-W4). Vanilla needed 3-6 tool calls; the waved arm used exactly 2.
+- **Style steering (STYLE) is regime-conditional — the −51% live A/B above is
+  RETIRED.** Never cite it: re-measured harness-lane, n=15/arm interleaved at
+  effort=low, the fused style measured **+65% wall** (median 10.7s vs 6.5s
+  style-off) — the win inverts in that regime; correctness held 15/15 in both
+  arms. The sustained −36%/−33% figure stands **only as a server-lane /
+  default-(high-)effort number**: style pays where the model would overthink
+  (the reasoning-heavy battery task ran −23% wall) and costs at low effort
+  where there is nothing to cut. The production harness now routes style per
+  session — high/xhigh-effort sessions only — rather than per turn, which
+  also preserves the prompt cache. Regime note and per-regime verification
+  method (battery) live in the sibling
+  [context-kit](https://github.com/KyaniteLabs/context-kit) repo.
+- **Time-per-task battery: upgraded from n=2 to n=3.** 7.9-14.3s per correct
+  task (median 11.3; 15/15 correct; 189-281 tok/correct) — a
+  thermal-dependent band; the warm-run value (7.9s) matches the old 7.6-7.7s
+  label. The community table above already carries this band.
+- **Fan daemon (measured in
+  [evo-x2-ec](https://github.com/KyaniteLabs/evo-x2-ec)): −3.5 to −5.8°C
+  peak, n=3.** Standardized ~105s probes with the daemon running: peak Tctl
+  93/92/94°C vs the stock ledger band 97.5-97.8°C; fans at 100%. Labeled
+  caveat: the stock arm was not re-run (daemon-untouched rule) — stock
+  figures come from the 2026-08-15 ledger.
+- Grader hardening shipped with the re-baseline: 6 FAIL→PASS flips, zero
+  regressions across 139 re-graded sessions — pass counts published before
+  this date may under-count.
+
 ## Credits
 
 This recipe and every number in it stands on other people's work:
