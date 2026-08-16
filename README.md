@@ -130,6 +130,35 @@ single-run A/Bs carry variance — the sustained numbers are the headline.
 Instruments: `components/bench/tpt-battery.py` and `tpt-style.py` reproduce all of
 the above against any endpoint.
 
+## Community results — post your numbers
+
+Ran this stack (or a cousin of it) on your box? **PR or issue your row —
+`components/bench/bench.sh` makes it one command** against a running server:
+it runs the cold/warm c30, time-per-task battery, quality suite, and rewrite
+bench, then prints a filled NUMBERS block you paste with your hardware line.
+
+| Hardware | Backend/build | Config | Cold tok/s | Warm tok/s | Real-traffic band | Time-per-task | Source |
+|---|---|---|---|---|---|---|---|
+| AMD Ryzen AI Max+ 395 / Radeon 8060S (gfx1151, 64GB unified) | llama.cpp b10435-era (9d57ce4), ROCm/HIP | UD-Q4_K_XL @ 96k, `draft-mtp,ngram-mod` n12 / n-min 24, f16 KV | 59.7 (c30) | 148–163 (repetition-assisted — ngram replays repeat/pattern traffic) | prose 11–24, code 30–40 | 7.9–14.3 s/task, median 11.3 (5-task battery, n=3, thermal band) | [findings](docs/findings.md) |
+| AMD Ryzen AI Max+ 395 / Radeon 8060S (gfx1151, 64GB unified) | llama.cpp b10435-era (9d57ce4), ROCm/HIP | UD-Q3_K_XL @ 128k, same spec stack | 63–64 (c30) | 148–163 (repetition-assisted) | — | 10.6–16.1 s/task (n=2) — ~2x more verbose thinking loses the clock | [findings](docs/findings.md) |
+
+Label rules (kept in every row, ask the same of yours): warm c30 under ngram
+is a repetition artifact — the label is part of the number; n>=3 per arm in
+one thermal window; cold = first exposure.
+
+**NUMBERS template** (bench.sh prints most of it filled in):
+
+```text
+hardware:
+backend/build:            (llama.cpp commit/build, backend, OS)
+config:                   (quant, ctx, spec flags, KV type)
+cold tok/s:               (c30, first exposure)
+warm tok/s:               (back-to-back repeats — label repetition-assisted)
+real-traffic band:        (novel prose / code, same stack)
+time-per-task:            (tpt-battery, n>=3, one thermal window)
+source-link:
+```
+
 ## Credits
 
 This recipe and every number in it stands on other people's work:
