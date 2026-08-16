@@ -11,7 +11,7 @@ completion tokens) showed thinking verbosity, not decode speed, decides task lat
 | GTT margin | 9.2GB | 11.3GB | 13.8GB |
 | quality suite | 6/6 | 6/6 | 5/6 |
 | agentic soak | 41/41 | — | 20/20 |
-| time-per-task (s @ tokens) | 7.6-7.7 @ ~170 | 10.6-16.1 @ 238-302 | not run (rejected on speed) |
+| time-per-task (s @ tokens) | 7.6-7.7 @ ~170 (n=2) | 10.6-16.1 @ 238-302 | not run (rejected on speed) |
 | code-task tokens, 3 runs | 402 / 450 | 705 / 740 / 994 | zero content @ 500 budget |
 | draft acceptance (novel traffic) | 0.345 | 0.492 | 0.478 |
 
@@ -48,13 +48,16 @@ section: single-run A/Bs carry variance — the sustained (n>=3) numbers are the
 
 - **Think-style steering, fused caveman+ponytail** (`bench/tpt-style.py`, 4 arms):
   **-36% tokens / -33% task time sustained** (n=3 vs n=8 baseline); live single-run
-  A/B **-51% wall** (variance-colored, not the headline). Philosophy: caveman = terse
+  A/B **-51% wall** (variance-colored, not the headline) (directional: measured on the
+  full stacked config — stack delta, not style alone; re-baseline pending). Philosophy: caveman = terse
   reasoning fragments; ponytail = lazy-senior-dev JUDGMENT — the does-it-need-to-exist
   → stdlib → one-line ladder; small fix beats big fix. Steering not caps: the owner
   veto on budget caps is a feature of the design (the model chooses how little to
   think; nothing forbids thinking).
 - **`read_symbol` + `code_graph` semantic navigation**: exploration task 48.6s /
-  13,917B tool output / 53.5KB prompts vs 22.6s / 276B / 4.9KB = **-98% tool tokens**.
+  13,917B tool output / 53.5KB prompts vs 22.6s / 276B / 4.9KB = **-98% tool tokens**
+  (byte deltas -98%/-91% are deterministic and stand; wall-time delta is directional
+  pending re-baseline after the tool-refusal fix).
 - **Tool-result diet**: identical-output dedup stubs **-66%** on re-check loops;
   progressive disclosure + spill files; diff-hunk edit evidence with parse verdicts.
 - **Summary-node compaction** past 300 events.

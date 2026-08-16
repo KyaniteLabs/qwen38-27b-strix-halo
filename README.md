@@ -57,7 +57,7 @@ llama-server -m Qwen3.8-27B-UD-Q4_K_XL.gguf -ngl 99 -c 98304 \
 3. Context-hungry option: the same flags with `UD-Q3_K_XL.gguf -c 131072`
    (63-64 cold / 148-163 warm, +33% context, 11.3GB margin) — but Q3's thinking runs
    ~2x more verbose on code/reasoning, so identical correct tasks complete 35-50%
-   slower (7.6-7.7s vs 10.6-16.1s per task). Choose it only when context, not
+   slower (7.6-7.7s vs 10.6-16.1s per task; tpt n=2). Choose it only when context, not
    latency, is the binding constraint.
 4. Optional stanzas in the ini: creative profile (`--spec-draft-p-min 0.75`,
    +27% long-form at ~10% code cost), saturated (mtp-only A/B variant).
@@ -108,14 +108,16 @@ single-run A/Bs carry variance — the sustained numbers are the headline.
 - **Think-style steering (fused caveman+ponytail)**: a system prompt that steers the
   model's internal reasoning style. Sustained **-36% tokens / -33% task time**
   (n=3 vs n=8 baseline); a live single-run A/B showed **-51% wall** (single-run —
-  treat as variance-colored, not the headline). Philosophy: caveman = terse reasoning
+  treat as variance-colored, not the headline) (directional: measured on the full stacked config — stack delta, not style alone; re-baseline pending). Philosophy: caveman = terse reasoning
   ("finding / fix / next"); ponytail = lazy-senior-dev judgment — the
   does-it-need-to-exist → stdlib → one-line ladder, small fix beats big fix. Steering,
   never caps: the owner's standing veto on token-budget caps is a design feature —
   the model decides how little to think, not when it is forbidden from thinking.
 - **Semantic navigation (`read_symbol` + `code_graph`)**: exploration task 48.6s /
   13,917B tool output / 53.5KB prompts (read-everything style) vs 22.6s / 276B /
-  4.9KB — **-98% tool tokens** at roughly half the wall time.
+  4.9KB — **-98% tool tokens** at roughly half the wall time (byte deltas
+  -98%/-91% are deterministic and stand; wall-time delta is directional pending
+  re-baseline after the tool-refusal fix).
 - **Tool-result diet**: identical-output dedup stubs (**-66%** tokens on re-check
   loops), progressive disclosure with spill files, diff-hunk edit evidence with parse
   verdicts.
