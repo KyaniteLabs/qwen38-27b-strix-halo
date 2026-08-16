@@ -80,3 +80,14 @@ section: single-run A/Bs carry variance — the sustained (n>=3) numbers are the
 - 6-prompt fixed suite (riddle/code/precision/explain/persona/multistep), >=3 bench runs, draft-acceptance from server journal, deep-context needle probes at 43k (spec-on identical to spec-off = no KV corruption), agentic tool-loop soak (41/41 on the champion stack, 20/20 on quant-ladder arms).
 - Thermal note: sustained ~4s-cadence agent load rides the GPU edge at 92C (boost-throttle operating point, recovers 92→61C in 45s; no heat soak).
 - EC fan control on the same box (~1-1.3°C delta under load): see [evo-x2-ec, pending publication].
+
+## Credits
+
+Engine: [ggml-org/llama.cpp](https://github.com/ggml-org/llama.cpp) (MIT) —
+every flag and number here is a llama.cpp measurement. Quants: [Unsloth](https://github.com/unslothai/unsloth)
+(Apache-2.0) UD dynamic quants, used as-shipped. Model: Qwen team (Apache-2.0).
+The style-steering section builds on two community skills — caveman
+(rolottr/caveman-skill, MIT) and ponytail (marmelab's copy, MIT) — fused in
+the sibling `context-kit` repo. Thermal/fan context: nathanmarlor's
+strix-halo-fan-control (MIT), documented in `evo-x2-ec`. Full credits and
+third-party notices: repo root README.
