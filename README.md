@@ -130,6 +130,35 @@ single-run A/Bs carry variance — the sustained numbers are the headline.
 Instruments: `components/bench/tpt-battery.py` and `tpt-style.py` reproduce all of
 the above against any endpoint.
 
+## Credits
+
+This recipe and every number in it stands on other people's work:
+
+- **[ggml-org/llama.cpp](https://github.com/ggml-org/llama.cpp)** (MIT) — the
+  entire engine: MTP + ngram-mod speculative decoding, the GGUF runtime, and
+  the b10435-era build every measurement here ran on. Nothing in this repo
+  works without it.
+- **[Unsloth](https://github.com/unslothai/unsloth)** (Apache-2.0) — the UD
+  dynamic quants (Q4_K_XL champion, Q3/Q2 ladder arms) this repo benchmarks,
+  used as-shipped with no re-quant. The dynamic-quant allocation scheme that
+  makes Q4_K_XL the quality-per-token winner is their system.
+- **Qwen team** — Qwen3.8-27B (Apache-2.0), the model under test.
+- **The public 56 tok/s reference** — the best public example we found for
+  this class (Qwen3.6-27B at 56 tok/s) anchored our "at/past the public
+  frontier we found" claim; cited wherever that claim appears.
+- **Skill authors whose thinking-style prompts Wave 2 fused and measured** —
+  caveman: [rolottr/caveman-skill](https://github.com/rolottr/caveman-skill)
+  (MIT); ponytail: the ponytail skill (marmelab's published copy carries an
+  MIT frontmatter). The fused prompt and its measurements live in the
+  sibling `context-kit` repo, which carries the full notices.
+- **[nathanmarlor/strix-halo-fan-control](https://github.com/nathanmarlor/strix-halo-fan-control)**
+  (MIT) — the EC fan daemon keeping this exact class of box cool; documented
+  for the EVO-X2 chassis in the sibling `evo-x2-ec` repo.
+- **Harness-side inspiration** — [DeepSeek Harness (DSH)](https://github.com/deepseek-ai/deepseek-harness)
+  (MIT) and [marks-pi-harness](https://github.com/earlyaidopters/marks-pi-harness)
+  (MIT): the local-model infrastructure philosophy behind the context-
+  engineering patterns (credited in detail in `context-kit`).
+
 ## License
 
 MIT. Benchmark data collected on personally-owned hardware; your clocks will vary.
