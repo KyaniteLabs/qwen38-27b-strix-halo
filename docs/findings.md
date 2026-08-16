@@ -81,6 +81,40 @@ section: single-run A/Bs carry variance — the sustained (n>=3) numbers are the
 - Thermal note: sustained ~4s-cadence agent load rides the GPU edge at 92C (boost-throttle operating point, recovers 92→61C in 45s; no heat soak).
 - EC fan control on the same box (~1-1.3°C delta under load): see [evo-x2-ec](https://github.com/KyaniteLabs/evo-x2-ec).
 
+## Re-baseline update (2026-08-16)
+
+Fixed harness (liam-core 9fa358b, J-EV ledger fingerprint on every run),
+n=3+ per arm unless labeled; the sections above stand as published history
+(no-retract protocol). Source: re-baseline experiment log
+(REBASELINE-RESULTS.md + VALIDITY-MAP.md, 2026-08-15/16 night).
+
+- **MUNCH wall: −65%, clean** — 27.9s → 9.8s median (n=3/arm interleaved,
+  6/6 correct, fingerprint 9fa358b). Supersedes the 48.6s→22.6s directional
+  label in the Wave-2 section above; the real delta is bigger than staged.
+  Bytes revise to −95% tool_result (5,182→277B) / −64% prompt_max
+  (9,308→3,389B) under W4 progressive disclosure — current-stack honest
+  numbers.
+- **STYLE: the −51% single-run A/B above is RETIRED — never cite it**
+  (stacked-config misattribution). Harness-lane re-measure, n=15/arm
+  interleaved at effort=low: fused style **+65% wall** (10.7s vs 6.5s
+  median) — inverted; 15/15 correct in both arms. The −36%/−33% sustained
+  figure is **regime-conditional**: server-lane / default-effort only
+  (reasoning-heavy task b1 ran −23% wall; F3 — style economics are
+  budget-dependent). The production harness now routes style **per session**
+  (high/xhigh-effort sessions only), preserving prefix-cache; per-turn
+  routing would break it.
+- **TPT: upgraded n=2 → n=3** — 7.9-14.3s per correct task (median 11.3,
+  warm-run 7.9, 15/15 correct); cite as a thermal-dependent band.
+- **FAN daemon: −3.5 to −5.8°C peak, n=3** — standardized ~105s probes with
+  the daemon running: peaks 93/92/94°C vs stock ledger 97.5-97.8°C (stock
+  not re-run — ledger baseline, labeled).
+- Graders hardened (case-insensitive contains, LaTeX any-of, fence-strip):
+  6 FAIL→PASS flips, 0 regressions; pass counts published before this date
+  may under-count.
+- Open defects recorded at re-baseline (not fixed, fingerprint stability):
+  harness tool-firing still fails at effort=high (F1); refusal detector
+  misses "No X tool exists"-class phrasings (F2).
+
 ## Credits
 
 Engine: [ggml-org/llama.cpp](https://github.com/ggml-org/llama.cpp) (MIT) —
