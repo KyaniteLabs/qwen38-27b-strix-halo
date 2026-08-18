@@ -1,0 +1,14 @@
+[knee 22:47:28Z] JUICE1 COMPLETE
+ HARD SET
+[math/off] n=17 acc=15/17 wall_med=5s think_med=241ch
+   sample-answers: ['18', '60', '400']
+[math/512] n=17 acc=17/17 wall_med=5s think_med=241ch
+   sample-answers: ['18', '60', '400']
+[math/1024] n=17 acc=17/17 wall_med=5s think_med=241ch
+   sample-answers: ['18', '60', '400']
+[math/2048] n=17 acc=16/17 wall_med=5s think_med=241ch
+   sample-answers: ['18', '60', '400']
+[math/65536] n=17 acc=15/17 wall_med=5s think_med=241ch
+   sample-answers: ['18', '60', '400']
+KNEEMAP DONE
+[knee 22:47:28Z] JUICE1 COMPLETE
