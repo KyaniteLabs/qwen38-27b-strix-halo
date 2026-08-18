@@ -1,0 +1,39 @@
+[sweep2 17:10:05Z] pmode timer parked
+[sweep2 17:10:05Z] champion KV = q4_0
+[sweep2 17:10:05Z] RE-SEED needle-1 (pre-crash, from ledger): [s4419] depth 10%: MISS fr=stop wall=1809s ptok=198227 ans=ok
+PARSER-PROBE-PASS
+[s4419] depth 10%: SKIP (done pre-crash)
+[s4419] depth 25%: HIT fr=stop wall=1857s ptok=198227 tbefore=51C tafter=72C ans='TOKFLINT-7702-KILO'
+[s4419] depth 35%: MISS fr=length wall=1917s ptok=198226 tbefore=72C tafter=70C ans='- **Risk**: Low; 67 medium/low'
+[s4419] depth 50%: MISS fr=stop wall=1890s ptok=198228 tbefore=72C tafter=72C ans='ok'
+[s4419] depth 75%: MISS fr=length wall=1893s ptok=198229 tbefore=72C tafter=70C ans='- **Risk**: Low; 67 medium/low'
+[sweep2 19:18:16Z] restored performance + timer
+Traceback (most recent call last):
+  File "<stdin>", line 49, in <module>
+  File "<stdin>", line 6, in ask
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 515, in open
+    response = self._open(req, data)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 532, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 1373, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 1348, in do_open
+    r = h.getresponse()
+        ^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/http/client.py", line 1457, in getresponse
+    response.begin()
+  File "/usr/lib/python3.12/http/client.py", line 336, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/http/client.py", line 305, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response

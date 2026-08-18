@@ -1,0 +1,9 @@
+[probe 20:59:16Z] P1: flipping champion to q8_0
+[probe 20:59:36Z] running on cache-type-k q8_0
+[q8arm] NEEDLE: fr=length wall=2002s ans='- **Risk**: Two critical secret exposures and 37 medium-severity code issues (including repeated missing workflow timeouts in `kinocut`) remain unaddressed; par'
+Traceback (most recent call last):
+  File "<string>", line 31, in <module>
+NameError: name 'choices' is not defined
+[probe 22:06:12Z] restoring q4_0
+[probe 22:08:08Z] restored: cache-type-k q4_0
+[probe 22:08:08Z] P1 COMPLETE (spec-off P2 = separate dispatch after harvest)
