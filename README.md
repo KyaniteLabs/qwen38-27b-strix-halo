@@ -1,5 +1,8 @@
 # Qwen3.8-27B on Strix Halo — tuned serving profile
 
+> Every number in this repo ships with its methodology. New measurements land first on
+> **[@KyaniteLabs_ on X](https://x.com/KyaniteLabs_)** — follow the build in public.
+
 Fully measured configuration for serving **Qwen3.8-27B** (Apache-2.0, released 2026-08-14)
 on **AMD Strix Halo** (Ryzen AI Max+ 395, Radeon 8060S, unified LPDDR5X, GTT 64GB) with
 **llama.cpp** — speculation-stacked to the practical frontier of this silicon.
