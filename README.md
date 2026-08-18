@@ -9,9 +9,11 @@ Current champion (production, restored 2026-08-15 19:36Z): **UD-Q4_K_XL @ 96k co
 ## UPDATE 2026-08-18 — KV cache advanced to 4-bit (q4_0); champion re-gated
 
 Same box, same model quant. Pre-registered promotion gate: paired arms,
-identical seed/haystack, same-session control, both at full 262k depth:
+identical seed/haystack, same-session control; both arms prefilled the same
+~198k-token haystack (server-reported prompt tokens — the generator's 262k
+was an estimate; stations are depth-fractions of the identical haystack):
 
-| Config | GSM8K paired (n=60) | 262k needle @50%/90% depth | trips | KV bits/value |
+| Config | GSM8K paired (n=60) | needle @50%/90% depth (~198k tok) | trips | KV bits/value |
 |---|---|---|---|---|
 | **NEW champion: K+V q4_0 KV** | identical accuracy (exact McNemar p=1.0), slightly faster (18.78 vs 19.47 s mean) | 0/2 — matches q8 arm's behavior | **0** | ~4.5 |
 | prior: K+V q8_0 | (baseline) | 0/2 | 1 (finish_reason=length @90%) | ~8.5 |
