@@ -6,6 +6,22 @@ on **AMD Strix Halo** (Ryzen AI Max+ 395, Radeon 8060S, unified LPDDR5X, GTT 64G
 
 Current champion (production, restored 2026-08-15 19:36Z): **UD-Q4_K_XL @ 96k context**.
 
+## UPDATE 2026-08-18 — KV cache advanced to 4-bit (q4_0); champion re-gated
+
+Same box, same model quant. Pre-registered promotion gate: paired arms,
+identical seed/haystack, same-session control, both at full 262k depth:
+
+| Config | GSM8K paired (n=60) | 262k needle @50%/90% depth | trips | KV bits/value |
+|---|---|---|---|---|
+| **NEW champion: K+V q4_0 KV** | identical accuracy (exact McNemar p=1.0), slightly faster (18.78 vs 19.47 s mean) | 0/2 — matches q8 arm's behavior | **0** | ~4.5 |
+| prior: K+V q8_0 | (baseline) | 0/2 | 1 (finish_reason=length @90%) | ~8.5 |
+
+Net: **~47% smaller KV cache at the same 262,144-token context**, no measured
+accuracy cost, zero corruption flags — the finish_reason tripwire stays armed
+on every serving hour. The 50%/90% MISSes are the model's known deep-context
+retrieval behavior at this length; both arms matched, which is exactly what
+the paired control is for. Rollback unit preserved.
+
 ## UPDATE 2026-08-16 — champion advanced to the NATIVE CEILING: 262k context
 
 Same hardware, same quant, three more gates passed in one night (ladder
@@ -13,7 +29,7 @@ Same hardware, same quant, three more gates passed in one night (ladder
 
 | Config | cold c30 | warm c30 | tpt battery | context |
 |---|---|---|---|---|
-| **NEW champion: Q4_K_XL + K+V q8_0 KV cache** | ~52-57 | **150-158 (band held)** | 6.8-12.9 s/task, 5/5 | **262,144 (native max)** |
+| champion 08-16 → superseded 08-18: Q4_K_XL + K+V q8_0 KV cache | ~52-57 | **150-158 (band held)** | 6.8-12.9 s/task, 5/5 | **262,144 (native max)** |
 | prior champion (row above) | 59.7 | 148-163 | 7.6-7.7 | 96k (f16 KV) |
 
 The whole gain comes from KV-cache quantization (K+V q8_0 — KV halves, so
