@@ -1,0 +1,9 @@
+[V5-1] MISS 2.2s fr=stop think=0ch ans='Stacked bar chart'
+[V5-2] HIT 1.0s fr=stop think=0ch ans='Red'
+[V5-3] HIT 1.0s fr=stop think=0ch ans='blue'
+[V5-4] HIT 1.0s fr=stop think=0ch ans='green'
+[V5-5] HIT 1.0s fr=stop think=0ch ans='Yes'
+[V5-6] HIT 1.0s fr=stop think=0ch ans='Yes'
+VISION-V5: 5/6 correct
+ROWS=6
+VISION-V5-DONE

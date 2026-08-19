@@ -1,0 +1,36 @@
+[oldblob-paired] HumanEval/1: PASS 4s think=0ch
+[oldblob-paired] HumanEval/5: PASS 3s think=0ch
+[oldblob-paired] HumanEval/7: PASS 3s think=0ch
+[oldblob-paired] HumanEval/10: PASS 11s think=0ch
+[oldblob-paired] HumanEval/18: PASS 3s think=0ch
+[oldblob-paired] HumanEval/19: PASS 5s think=0ch
+[oldblob-paired] HumanEval/29: PASS 1s think=0ch
+[oldblob-paired] HumanEval/31: PASS 4s think=0ch
+[oldblob-paired] HumanEval/37: PASS 4s think=0ch
+[oldblob-paired] HumanEval/41: PASS 2s think=0ch
+[oldblob-paired] HumanEval/44: PASS 2s think=0ch
+[oldblob-paired] HumanEval/50: FAIL (Traceback (most recent call last):
+  File "/tmp/tmphvp52g_0.py", line 37, in <mo) 2s think=0ch
+[oldblob-paired] HumanEval/70: PASS 3s think=0ch
+[oldblob-paired] HumanEval/71: PASS 4s think=0ch
+[oldblob-paired] HumanEval/75: PASS 9s think=0ch
+[oldblob-paired] HumanEval/76: PASS 5s think=0ch
+[oldblob-paired] HumanEval/78: PASS 3s think=0ch
+[oldblob-paired] HumanEval/80: PASS 3s think=0ch
+[oldblob-paired] HumanEval/85: PASS 2s think=0ch
+[oldblob-paired] HumanEval/96: PASS 7s think=0ch
+[oldblob-paired] HumanEval/104: PASS 4s think=0ch
+[oldblob-paired] HumanEval/107: PASS 3s think=0ch
+[oldblob-paired] HumanEval/111: PASS 4s think=0ch
+[oldblob-paired] HumanEval/125: PASS 4s think=0ch
+[oldblob-paired] HumanEval/133: PASS 2s think=0ch
+[oldblob-paired] HumanEval/136: PASS 3s think=0ch
+[oldblob-paired] HumanEval/137: PASS 5s think=0ch
+[oldblob-paired] HumanEval/140: PASS 9s think=0ch
+[oldblob-paired] HumanEval/145: FAIL (Traceback (most recent call last):
+  File "/tmp/tmpjy85ece7.py", line 34, in <mo) 3s think=0ch
+[oldblob-paired] HumanEval/158: PASS 4s think=0ch
+SCORE: 28/30 = 93%
+LABEL=oldblob-paired BUDGET=None
+AGENTIC-BENCH-DONE
+ROWS=30

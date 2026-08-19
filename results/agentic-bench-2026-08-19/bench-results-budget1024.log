@@ -1,0 +1,36 @@
+[champion-q4-budget1024] HumanEval/1: PASS 25s think=2288ch
+[champion-q4-budget1024] HumanEval/5: PASS 8s think=1172ch
+[champion-q4-budget1024] HumanEval/7: PASS 6s think=659ch
+[champion-q4-budget1024] HumanEval/10: PASS 54s think=3839ch
+[champion-q4-budget1024] HumanEval/18: PASS 16s think=1576ch
+[champion-q4-budget1024] HumanEval/19: PASS 24s think=1428ch
+[champion-q4-budget1024] HumanEval/29: PASS 2s think=395ch
+[champion-q4-budget1024] HumanEval/31: PASS 11s think=620ch
+[champion-q4-budget1024] HumanEval/37: PASS 20s think=1619ch
+[champion-q4-budget1024] HumanEval/41: PASS 10s think=973ch
+[champion-q4-budget1024] HumanEval/44: PASS 14s think=1661ch
+[champion-q4-budget1024] HumanEval/50: FAIL (Traceback (most recent call last):
+  File "/tmp/tmpe_udkcol.py", line 36, in <mo) 13s think=1249ch
+[champion-q4-budget1024] HumanEval/70: PASS 13s think=1034ch
+[champion-q4-budget1024] HumanEval/71: PASS 49s think=2499ch
+[champion-q4-budget1024] HumanEval/75: PASS 57s think=3616ch
+[champion-q4-budget1024] HumanEval/76: PASS 66s think=3371ch
+[champion-q4-budget1024] HumanEval/78: PASS 10s think=390ch
+[champion-q4-budget1024] HumanEval/80: PASS 15s think=1209ch
+[champion-q4-budget1024] HumanEval/85: PASS 4s think=701ch
+[champion-q4-budget1024] HumanEval/96: PASS 22s think=1213ch
+[champion-q4-budget1024] HumanEval/104: PASS 38s think=2334ch
+[champion-q4-budget1024] HumanEval/107: PASS 12s think=1142ch
+[champion-q4-budget1024] HumanEval/111: PASS 25s think=1784ch
+[champion-q4-budget1024] HumanEval/125: PASS 34s think=2559ch
+[champion-q4-budget1024] HumanEval/133: PASS 46s think=2485ch
+[champion-q4-budget1024] HumanEval/136: PASS 15s think=1099ch
+[champion-q4-budget1024] HumanEval/137: PASS 34s think=2352ch
+[champion-q4-budget1024] HumanEval/140: PASS 58s think=4122ch
+[champion-q4-budget1024] HumanEval/145: FAIL (Traceback (most recent call last):
+  File "/tmp/tmpkev49lz7.py", line 34, in <mo) 49s think=3121ch
+[champion-q4-budget1024] HumanEval/158: PASS 43s think=2884ch
+SCORE: 28/30 = 93%
+LABEL=champion-q4-budget1024 BUDGET=1024
+AGENTIC-BENCH-DONE
+ROWS=30

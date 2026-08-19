@@ -1,0 +1,36 @@
+[newblob-3f227079] HumanEval/1: PASS 4s think=0ch
+[newblob-3f227079] HumanEval/5: PASS 3s think=0ch
+[newblob-3f227079] HumanEval/7: PASS 3s think=0ch
+[newblob-3f227079] HumanEval/10: PASS 9s think=0ch
+[newblob-3f227079] HumanEval/18: PASS 3s think=0ch
+[newblob-3f227079] HumanEval/19: PASS 6s think=0ch
+[newblob-3f227079] HumanEval/29: PASS 3s think=0ch
+[newblob-3f227079] HumanEval/31: PASS 3s think=0ch
+[newblob-3f227079] HumanEval/37: PASS 3s think=0ch
+[newblob-3f227079] HumanEval/41: PASS 2s think=0ch
+[newblob-3f227079] HumanEval/44: PASS 3s think=0ch
+[newblob-3f227079] HumanEval/50: FAIL (Traceback (most recent call last):
+  File "/tmp/tmp9b3hg6qm.py", line 37, in <mo) 3s think=0ch
+[newblob-3f227079] HumanEval/70: PASS 3s think=0ch
+[newblob-3f227079] HumanEval/71: PASS 5s think=0ch
+[newblob-3f227079] HumanEval/75: PASS 8s think=0ch
+[newblob-3f227079] HumanEval/76: PASS 6s think=0ch
+[newblob-3f227079] HumanEval/78: PASS 3s think=0ch
+[newblob-3f227079] HumanEval/80: PASS 3s think=0ch
+[newblob-3f227079] HumanEval/85: PASS 2s think=0ch
+[newblob-3f227079] HumanEval/96: PASS 7s think=0ch
+[newblob-3f227079] HumanEval/104: PASS 4s think=0ch
+[newblob-3f227079] HumanEval/107: PASS 3s think=0ch
+[newblob-3f227079] HumanEval/111: PASS 4s think=0ch
+[newblob-3f227079] HumanEval/125: PASS 3s think=0ch
+[newblob-3f227079] HumanEval/133: PASS 2s think=0ch
+[newblob-3f227079] HumanEval/136: PASS 3s think=0ch
+[newblob-3f227079] HumanEval/137: PASS 4s think=0ch
+[newblob-3f227079] HumanEval/140: PASS 6s think=0ch
+[newblob-3f227079] HumanEval/145: FAIL (Traceback (most recent call last):
+  File "/tmp/tmpmjn7ileg.py", line 34, in <mo) 3s think=0ch
+[newblob-3f227079] HumanEval/158: PASS 3s think=0ch
+SCORE: 28/30 = 93%
+LABEL=newblob-3f227079 BUDGET=None
+AGENTIC-BENCH-DONE
+ROWS=30
