@@ -1,0 +1,6 @@
+[QUOTE-CODE] 1818s fr=stop ans='HORIZON-TEST-4419'
+[QUOTE-QUOTE] 16s fr=stop ans='Station QUOTE access code: HORIZON-TEST-4419.'
+[QUOTE-YESNO] 9s fr=stop ans='YES'
+[QUOTE-SUMMARY] 27s fr=stop ans='The text is a massive, repetitive log of simulated survey measurements and calibration data across various industrial and agricultural categories (suc'
+ROWS=4
+QUOTE-PROBE-DONE

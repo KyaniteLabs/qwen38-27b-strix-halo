@@ -1,0 +1,5 @@
+[198k] depth 10%: HIT fr=stop wall=1810s ptok=198227 ans='GRANITE-3319-BRAVO'
+[198k] depth 25%: MISS fr=length wall=1838s ptok=198229 ans='- **Risk:** Low; 69 medium/low code-qual'
+[198k] depth 50%: HIT fr=stop wall=1830s ptok=198230 ans='COBALT-8835-DELTA'
+ROWS=3
+HORIZON198K-DONE
