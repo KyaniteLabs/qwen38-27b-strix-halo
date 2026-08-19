@@ -22,7 +22,7 @@ was an estimate; stations are depth-fractions of the identical haystack):
 | **NEW champion: K+V q4_0 KV** | identical accuracy (exact McNemar p=1.0), slightly faster (18.78 vs 19.47 s mean) | 0/2 — matches q8 arm's behavior | **0** | ~4.5 |
 | prior: K+V q8_0 | (baseline) | 0/2 | 1 (finish_reason=length @90%) | ~8.5 |
 
-Net: **~47% smaller KV cache at the same 262,144-token context**, no measured
+Net: **~47% smaller KV cache (4.3GB saved: 9.1→4.8GB on this 16-attn-layer arch)** at the same 262,144-token context, no measured
 accuracy cost, zero corruption flags — the finish_reason tripwire stays armed
 on every serving hour. The 50%/90% failures are **degenerate-basin outputs**
 (a canned off-topic report, not a retrieval "miss" and not a smooth fade);
