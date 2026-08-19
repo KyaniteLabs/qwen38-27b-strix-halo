@@ -1,0 +1,36 @@
+[champion-q4-budget512] HumanEval/1: PASS 35s think=2201ch
+[champion-q4-budget512] HumanEval/5: PASS 17s think=1092ch
+[champion-q4-budget512] HumanEval/7: PASS 12s think=882ch
+[champion-q4-budget512] HumanEval/10: PASS 39s think=2284ch
+[champion-q4-budget512] HumanEval/18: PASS 26s think=1765ch
+[champion-q4-budget512] HumanEval/19: PASS 19s think=1206ch
+[champion-q4-budget512] HumanEval/29: PASS 5s think=395ch
+[champion-q4-budget512] HumanEval/31: PASS 14s think=787ch
+[champion-q4-budget512] HumanEval/37: PASS 19s think=1195ch
+[champion-q4-budget512] HumanEval/41: PASS 16s think=1063ch
+[champion-q4-budget512] HumanEval/44: PASS 34s think=1950ch
+[champion-q4-budget512] HumanEval/50: FAIL (Traceback (most recent call last):
+  File "/tmp/tmpt40qfwi6.py", line 36, in <mo) 20s think=1360ch
+[champion-q4-budget512] HumanEval/70: PASS 17s think=1053ch
+[champion-q4-budget512] HumanEval/71: PASS 33s think=1488ch
+[champion-q4-budget512] HumanEval/75: PASS 29s think=1992ch
+[champion-q4-budget512] HumanEval/76: PASS 36s think=1664ch
+[champion-q4-budget512] HumanEval/78: PASS 11s think=662ch
+[champion-q4-budget512] HumanEval/80: PASS 18s think=1198ch
+[champion-q4-budget512] HumanEval/85: PASS 13s think=701ch
+[champion-q4-budget512] HumanEval/96: PASS 29s think=1864ch
+[champion-q4-budget512] HumanEval/104: PASS 25s think=1688ch
+[champion-q4-budget512] HumanEval/107: PASS 24s think=1507ch
+[champion-q4-budget512] HumanEval/111: PASS 25s think=1807ch
+[champion-q4-budget512] HumanEval/125: PASS 25s think=2017ch
+[champion-q4-budget512] HumanEval/133: PASS 30s think=1811ch
+[champion-q4-budget512] HumanEval/136: PASS 26s think=1590ch
+[champion-q4-budget512] HumanEval/137: PASS 48s think=2159ch
+[champion-q4-budget512] HumanEval/140: PASS 38s think=2110ch
+[champion-q4-budget512] HumanEval/145: FAIL (Traceback (most recent call last):
+  File "/tmp/tmpz7czqx3d.py", line 34, in <mo) 34s think=1705ch
+[champion-q4-budget512] HumanEval/158: PASS 33s think=2134ch
+SCORE: 28/30 = 93%
+LABEL=champion-q4-budget512 BUDGET=512
+AGENTIC-BENCH-DONE
+ROWS=30

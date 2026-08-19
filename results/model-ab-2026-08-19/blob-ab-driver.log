@@ -1,0 +1,51 @@
+[ab 20:58:37Z] waiting for budget-arms driver to complete
+[ab 20:58:37Z] budget arms complete
+[ab 20:58:37Z] pre-flight OK (sha verified, models present)
+[ab 20:58:41Z] champion stopped
+[ab 20:58:41Z] launched oldblob-paired (PID 1609696), waiting health
+[ab 20:59:13Z] oldblob-paired healthy, load+init 32s
+[ab 21:01:15Z] bench oldblob-paired done: LABEL=oldblob-paired BUDGET=None AGENTIC-BENCH-DONE ROWS=30 
+[ab 21:01:22Z] vision oldblob-paired done: VISION-V5: 5/6 correct
+speed oldblob-paired gen1: 268 tok, fr=stop
+speed oldblob-paired gen2: 271 tok, fr=stop
+speed oldblob-paired gen3: 280 tok, fr=stop
+[ab 21:02:46Z] launched newblob-3f227079 (PID 1630907), waiting health
+[ab 21:03:18Z] newblob-3f227079 healthy, load+init 32s
+[ab 21:05:14Z] bench newblob-3f227079 done: LABEL=newblob-3f227079 BUDGET=None AGENTIC-BENCH-DONE ROWS=30 
+[ab 21:05:21Z] vision newblob-3f227079 done: VISION-V5: 5/6 correct
+speed newblob-3f227079 gen1: 297 tok, fr=stop
+speed newblob-3f227079 gen2: 257 tok, fr=stop
+speed newblob-3f227079 gen3: 284 tok, fr=stop
+[ab 21:06:52Z] window complete — restoring champion
+dblob-paired.log
+[ab 21:01:22Z] vision oldblob-paired done: VISION-V5: 5/6 correct
+speed oldblob-paired gen1: 268 tok, fr=stop
+speed oldblob-paired gen2: 271 tok, fr=stop
+speed oldblob-paired gen3: 280 tok, fr=stop
+[ab 21:02:46Z] launched newblob-3f227079 (PID 1630907), waiting health
+[ab 21:03:18Z] newblob-3f227079 healthy, load+init 32s
+[newblob-3f227079] HumanEval/145: FAIL (Traceback (most recent call last):
+  File "/tmp/tmpmjn7ileg.py", line 34, in <mo) 3s think=0ch
+[newblob-3f227079] HumanEval/158: PASS 3s think=0ch
+SCORE: 28/30 = 93%
+LABEL=newblob-3f227079 BUDGET=None
+AGENTIC-BENCH-DONE
+[ab 21:05:14Z] bench newblob-3f227079 done: LABEL=newblob-3f227079 BUDGET=None AGENTIC-BENCH-DONE ROWS=30 
+JPEGs created via PIL
+[V5-1] MISS 2.2s fr=stop think=0ch ans='Stacked bar chart'
+[V5-2] HIT 1.0s fr=stop think=0ch ans='Red'
+[V5-3] HIT 1.0s fr=stop think=0ch ans='blue'
+[V5-4] HIT 1.0s fr=stop think=0ch ans='green'
+[V5-5] HIT 1.0s fr=stop think=0ch ans='Yes'
+[V5-6] HIT 1.0s fr=stop think=0ch ans='Yes'
+VISION-V5: 5/6 correct
+WROTE 6 rows to /home/simon/exp/vision-newblob-3f227079.log
+[ab 21:05:21Z] vision newblob-3f227079 done: VISION-V5: 5/6 correct
+speed newblob-3f227079 gen1: 297 tok, fr=stop
+speed newblob-3f227079 gen2: 257 tok, fr=stop
+speed newblob-3f227079 gen3: 284 tok, fr=stop
+[ab 21:06:52Z] window complete — restoring champion
+[ab 21:07:22Z] champion restored: PID=1640414 kv_k=q4_0
+[ab 21:07:22Z] champion restored: PID=1640414 kv_k=q4_0
+[ab 21:07:22Z] AB-COMPLETE (champion active; decision package next)
+[ab 21:07:22Z] AB-COMPLETE (champion active; decision package next)
