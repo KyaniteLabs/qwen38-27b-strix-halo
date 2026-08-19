@@ -1,26 +1,35 @@
-# Vision battery v5 — Q4 quant produces degenerate visual output (2026-08-19)
+# Vision battery v5 — CORRECTED: llama.cpp buffer regression, not quant (2026-08-19)
 
-## Finding
-Qwen3.8-27B at Q4_K_XL quant + mmproj-F16.gguf: ALL 6 vision questions return
-the same repeated slash characters (`//////...`) with fr=length, think=0ch.
-The vision API pipeline works correctly (no decode errors, no 400s, images
-received and processed). The output is a consistent degenerate pattern across
-ALL images (colors, gradients, system graphs).
+## Finding (corrected same day)
+Qwen3.8-27B at Q4_K_XL + mmproj-F16.gguf: all 6 vision questions returned
+repeated slash characters (`//////...`) with finish_reason=length, think=0ch.
 
-## Architecture context
-- MODEL GGUF (866 tensors): language model only, Q4_K_XL quant
-- MMPROJ GGUF (334 tensors): 27-layer ViT + projection, F16 precision
-- Vision embeddings from F16 mmproj are injected into the Q4 model's context
-- The Q4-quantized language model cannot correctly process these embeddings
+**Initial diagnosis (WRONG):** Q4-quantized language model cannot process F16
+vision embeddings; vision needs Q8+. Falsified — the quant was never the problem.
 
-## Implication
-Vision on this rig requires a higher model quant (Q8_0 or above). The Q4_K_XL
-champion is text-only in practice. Vision-capable serving needs either:
-(a) a separate higher-quant model for vision tasks, or
-(b) a mixed-quant approach that preserves vision-capable precision, or
-(c) acceptance that the $1,400 rig's vision lane requires trade-offs
+**Actual root cause:** llama.cpp commit c7d8722 re-enables host buffers on
+integrated GPUs → NaN logits on prompts >2k tokens split across decode calls
+→ degenerate token loop. Vision prompts cross that threshold via image tokens
+(image embeddings alone exceed ~2k tokens), so EVERY vision request degenerated.
+Text prompts under 2k tokens stayed clean — which is why text benchmarks
+passed on the same broken binary.
+
+Fixed by reverting c7d8722 (see FIX-APPLIED.md). Upstream:
+ggml-org/llama.cpp#26209 (bisected on same hardware class, gfx1151),
+#23577, previously #16308/#15034 (Jetson Orin, same integrated-GPU class).
+
+## After the revert (same quant, same mmproj, only delta = the revert)
+- `vision-v5-after-fix.log`: **5/6 correct**, sub-second responses, all
+  finish_reason=stop. The one miss (V5-1) is a grading miss — the answer
+  "Stacked bar chart" was a reasonable description of the system graph.
+- Text regression (`../agentic-bench-2026-08-19/bench-post-fix-regression.log`):
+  HumanEval 28/30 = 93%, same two failing problems as pre-revert.
+
+## Raw logs
+- `vision-v5-results.log` — BEFORE the revert: 0/6, all `//////`, fr=length
+- `vision-v5-after-fix.log` — AFTER the revert: 5/6, fr=stop
 
 ## Conditions
 GMKtec EVO-X2 ($1,400), Ryzen AI Max+ 395, 96GB unified. Q4_K_XL + q4_0 KV.
-MTP n12 + ngram capped. llama.cpp dflash fork. PIL-generated JPEGs (confirmed
-compatible with stb_image decoder). 6 questions × 300 max tokens.
+MTP n12 + ngram capped. llama.cpp dflash fork (9d57ce4 + #27083 + c7d8722
+revert, commit 46aa138f3). PIL-generated JPEGs. 6 questions × 300 max tokens.
