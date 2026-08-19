@@ -1,0 +1,16 @@
+{
+ "control": "q8",
+ "treatment": "q4",
+ "n_paired": 60,
+ "acc_control": 96.66666666666667,
+ "acc_treatment": 96.66666666666667,
+ "delta_pp": 0.0,
+ "discordant_b": 0,
+ "discordant_c": 0,
+ "mcnemar_p": 1.0,
+ "mean_wall_control": 19.11466666666667,
+ "mean_wall_treatment": 19.636333333333333,
+ "anomalies_control": [],
+ "anomalies_treatment": [],
+ "ts": "2026-08-19T06:42:21Z"
+}
