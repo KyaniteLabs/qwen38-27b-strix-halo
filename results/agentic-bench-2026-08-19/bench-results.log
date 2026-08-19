@@ -1,0 +1,36 @@
+[champion-q4-noteMP] HumanEval/1: PASS 4s think=0ch
+[champion-q4-noteMP] HumanEval/5: PASS 3s think=0ch
+[champion-q4-noteMP] HumanEval/7: PASS 3s think=0ch
+[champion-q4-noteMP] HumanEval/10: PASS 10s think=0ch
+[champion-q4-noteMP] HumanEval/18: PASS 3s think=0ch
+[champion-q4-noteMP] HumanEval/19: PASS 5s think=0ch
+[champion-q4-noteMP] HumanEval/29: PASS 1s think=0ch
+[champion-q4-noteMP] HumanEval/31: PASS 4s think=0ch
+[champion-q4-noteMP] HumanEval/37: PASS 4s think=0ch
+[champion-q4-noteMP] HumanEval/41: PASS 2s think=0ch
+[champion-q4-noteMP] HumanEval/44: PASS 2s think=0ch
+[champion-q4-noteMP] HumanEval/50: FAIL (Traceback (most recent call last):
+  File "/tmp/tmpd_082euy.py", line 37, in <mo) 2s think=0ch
+[champion-q4-noteMP] HumanEval/70: PASS 4s think=0ch
+[champion-q4-noteMP] HumanEval/71: PASS 4s think=0ch
+[champion-q4-noteMP] HumanEval/75: PASS 8s think=0ch
+[champion-q4-noteMP] HumanEval/76: PASS 5s think=0ch
+[champion-q4-noteMP] HumanEval/78: PASS 3s think=0ch
+[champion-q4-noteMP] HumanEval/80: PASS 3s think=0ch
+[champion-q4-noteMP] HumanEval/85: PASS 2s think=0ch
+[champion-q4-noteMP] HumanEval/96: PASS 7s think=0ch
+[champion-q4-noteMP] HumanEval/104: PASS 4s think=0ch
+[champion-q4-noteMP] HumanEval/107: PASS 4s think=0ch
+[champion-q4-noteMP] HumanEval/111: PASS 4s think=0ch
+[champion-q4-noteMP] HumanEval/125: PASS 4s think=0ch
+[champion-q4-noteMP] HumanEval/133: PASS 2s think=0ch
+[champion-q4-noteMP] HumanEval/136: PASS 3s think=0ch
+[champion-q4-noteMP] HumanEval/137: PASS 5s think=0ch
+[champion-q4-noteMP] HumanEval/140: PASS 9s think=0ch
+[champion-q4-noteMP] HumanEval/145: FAIL (Traceback (most recent call last):
+  File "/tmp/tmp75t1fnjh.py", line 34, in <mo) 3s think=0ch
+[champion-q4-noteMP] HumanEval/158: PASS 3s think=0ch
+SCORE: 28/30 = 93%
+LABEL=champion-q4-noteMP BUDGET=None
+AGENTIC-BENCH-DONE
+ROWS=30
