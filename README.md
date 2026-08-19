@@ -7,7 +7,8 @@ Fully measured configuration for serving **Qwen3.8-27B** (Apache-2.0, released 2
 on **AMD Strix Halo** (Ryzen AI Max+ 395, Radeon 8060S, unified LPDDR5X, GTT 64GB) with
 **llama.cpp** — speculation-stacked to the practical frontier of this silicon.
 
-Current champion (production, restored 2026-08-15 19:36Z): **UD-Q4_K_XL @ 96k context**.
+Current champion (production, 2026-08-18 gate v2): **UD-Q4_K_XL @ 262,144 ctx, K+V q4_0 KV**.
+(96k / f16 and 262k / q8_0 are prior rungs — tables below.)
 
 ## UPDATE 2026-08-18 — KV cache advanced to 4-bit (q4_0); champion re-gated
 
@@ -23,9 +24,11 @@ was an estimate; stations are depth-fractions of the identical haystack):
 
 Net: **~47% smaller KV cache at the same 262,144-token context**, no measured
 accuracy cost, zero corruption flags — the finish_reason tripwire stays armed
-on every serving hour. The 50%/90% MISSes are the model's known deep-context
-retrieval behavior at this length; both arms matched, which is exactly what
-the paired control is for. Rollback unit preserved.
+on every serving hour. The 50%/90% failures are **degenerate-basin outputs**
+(a canned off-topic report, not a retrieval "miss" and not a smooth fade);
+both arms matched, which is exactly what the paired control is for. Label
+haystack size by server `prompt_n` (198,227), not the generator estimate.
+Rollback unit preserved.
 
 ## UPDATE 2026-08-16 — champion advanced to the NATIVE CEILING: 262k context
 
