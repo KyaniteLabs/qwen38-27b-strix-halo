@@ -33,3 +33,10 @@ ggml-org/llama.cpp#26209 (bisected on same hardware class, gfx1151),
 GMKtec EVO-X2 ($1,400), Ryzen AI Max+ 395, 96GB unified. Q4_K_XL + q4_0 KV.
 MTP n12 + ngram capped. llama.cpp dflash fork (9d57ce4 + #27083 + c7d8722
 revert, commit 46aa138f3). PIL-generated JPEGs. 6 questions × 300 max tokens.
+
+## Thinking ON (added 2026-08-19 ~21:1xZ)
+`vision-v5-think-results.log`: same 6 questions with enable_thinking true +
+reasoning_budget 512. **5/6 — same score, same single miss (V5-1), 3.3–12.1s
+per answer vs 0.3–1.8s thinking-off (4–12x slower).** The miss persists after
+664 chars of reasoning — a chart-interpretation disagreement, not retrieval.
+Verdict: VQA on this champion routes thinking-OFF.
