@@ -286,3 +286,21 @@ This recipe and every number in it stands on other people's work:
 ## License
 
 MIT. Benchmark data collected on personally-owned hardware; your clocks will vary.
+
+## UPDATE 2026-08-19 — spec-stack sweep + agentic bench ready
+
+Five-arm spec sweep on the champion config ([results](results/spec-sweep-2026-08-19/)):
+
+| Arm | c30 median | Prose tok/s |
+|-----|-----------|-------------|
+| MTP+ngram uncapped (was) | 1.5s | 10.8 |
+| **MTP+ngram capped-n12 (now)** | **1.5s** | **11.0** |
+| MTP solo | 1.9s | 10.7 |
+| ngram solo | 3.4s | 11.3 |
+| spec off | 7.5s | 11.1 |
+
+Spec decoding is worth **5× on repetition-heavy tasks**. The ngram cap costs nothing —
+`--spec-ngram-mod-n-max 12` now rides the champion. MTP + ngram together beat either alone.
+
+Agentic bench (HumanEval 30-problem, paired, dry-run verified 30/30 canonical solutions):
+harness ready in [agentic-bench/](https://github.com/KyaniteLabs/qwen38-27b-strix-halo/blob/main/agentic-bench/).
