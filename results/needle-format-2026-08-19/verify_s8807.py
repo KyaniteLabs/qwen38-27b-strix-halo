@@ -22,7 +22,7 @@ src = open(os.path.join(HERE, "depth-remap-s8807-results.log")).read()
 lines = src.splitlines()
 fail = []
 
-rows = [l for l in lines if l.startswith("[remap s8807]")]
+rows = [l for l in lines if l.startswith("[remap s8807] depth")]
 if len(rows) != 6: fail.append(f"expected 6 cells, got {len(rows)}")
 
 hits = 0

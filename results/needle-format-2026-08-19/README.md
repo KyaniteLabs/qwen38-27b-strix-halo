@@ -68,3 +68,14 @@ pre-revert measurements need corrective addenda (board D78/D79).
 server-verified), exact code retrieved, finish_reason=stop, 53-min prefill.**
 The corrected retrieval claim now holds at the literal native ceiling, not just
 at 198k. "Tested at native ceiling" is now a true sentence.
+
+## UPDATE 2026-08-20 09:19Z — SECOND SEED COMPLETE: 6/6. BOTH SEEDS, ALL DEPTHS, CEILING.
+`depth-remap-s8807-results.log` (verifier: `verify_s8807.py`, structure valid, 6/6):
+seed 8807 retrieved the exact code at all six depths (10/25/35/50/75/90%, 198k,
+byte-identical s8807 stations, every cell fr=stop, 71-73C sustained under balanced
+power). Combined with seed 4419 (6/6, 2026-08-20 00:35Z) and the native-max cell
+(261,130/262,144 tok HIT, 05:58Z): **exact needle retrieval at every tested depth,
+both seeds, at the native ceiling — 13/13 cells post-revert, zero attractor outputs.**
+The published "n=1" qualifier on the inversion claim is now superseded by cross-seed
+replication. Pre-revert comparison: the same instrument measured 1/6-completed with
+degenerate attractors on s4419 and never completed s8807 at all.
