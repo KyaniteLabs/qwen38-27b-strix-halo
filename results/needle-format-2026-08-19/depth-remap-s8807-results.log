@@ -1,0 +1,9 @@
+[remap s8807] depth 10%: HIT fr=stop wall=1992s ptok=198353 tb=82C ta=72C ans='MARBLE-8821-TANGO'
+[remap s8807] depth 25%: HIT fr=stop wall=2005s ptok=198354 tb=72C ta=71C ans='COPPER-6104-DELTA'
+[remap s8807] depth 35%: HIT fr=stop wall=1994s ptok=198354 tb=72C ta=71C ans='SLATE-9350-BRAVO'
+[remap s8807] depth 50%: HIT fr=stop wall=2006s ptok=198354 tb=71C ta=72C ans='ONYX-2268-ECHO'
+[remap s8807] depth 75%: HIT fr=stop wall=1995s ptok=198354 tb=72C ta=71C ans='QUARTZ-7742-FOX'
+[remap s8807] depth 90%: HIT fr=stop wall=2002s ptok=198353 tb=73C ta=72C ans='AMBER-4486-TANGO'
+[remap s8807] TOTAL 6/6
+DEPTH-REMAP-S8807 DONE
+ROWS=6
