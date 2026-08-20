@@ -167,7 +167,10 @@ def grade(code, r):
 
 if __name__ == "__main__":
     rows = [json.loads(l) for l in open(DATASET)]
-    subset = select_subset(rows)
+    if os.environ.get("LCB_ALL") == "1":
+        subset = rows
+    else:
+        subset = select_subset(rows)
     if ONLY:
         subset = [r for r in subset if r["question_id"] in ONLY]
 
