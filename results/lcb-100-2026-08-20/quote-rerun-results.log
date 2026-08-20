@@ -1,0 +1,6 @@
+[quote-rerun] cold exact: HIT fr=stop wall=1986s ptok=198227 ans='HORIZON-TEST-4419'
+[quote-rerun] warm quote: HIT 23.8s fr=stop ans='Station QUOTE access code: HORIZON-TEST-4419.'
+[quote-rerun] warm exists: HIT 10.0s fr=stop ans='Yes'
+[quote-rerun] warm summary: n/a 17.5s fr=length ans='The text consists of 5,799 individual survey records spannin'
+QUOTE-RERUN DONE
+ROWS=4
