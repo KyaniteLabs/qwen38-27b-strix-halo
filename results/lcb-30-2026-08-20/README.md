@@ -65,7 +65,13 @@ the three labeled conditions above.
   `lcb-bench.py` is the exact canonical grader (byte-verified against the box
   copy after a stale-version mixup was caught and fixed during the gate).
 - Arm A/B generations were not saved (fixed for later arms); arm A was
-  re-fired with saves as a reproduction check — see `lcb-30-arepro-results.log`.
+  re-fired with saves as a reproduction check (`lcb-30-arepro-results.log`,
+  `gen-arepro/`): **14/30 vs the original 13/30, 25/30 per-problem agreement.**
+  The 5 flips: 3723/3817/3793 FAIL→PASS (independently reproducing the grader
+  corrections), abc390_c/abc398_g PASS→FAIL (marginal truncation-edge passes
+  — pass-capable but run-dependent). Composite unchanged at 20/30 (union of
+  demonstrated passes). takeaway: single-run verdicts on this stack carry a
+  ~±2-problem noise floor even at temp 0; the composite framing absorbs it.
 
 ## Raw
 - `lcb-30-results.log` — arm A (30 rows + sentinel)
