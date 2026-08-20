@@ -53,10 +53,19 @@ the three labeled conditions above.
    composite reads 20/30 and not the originally reported 19/30.
 
 ## Verification
-`verify_claims.py` recomputes every number in this README from the raw logs
-(row counts, sentinels, arm scores, set identities, the corrected composite,
-difficulty split, determinism of the subset seed, and that no arm-A pass
-rode the buggy functional path). Run: `python3 verify_claims.py` — exit 0.
+- `verify_claims.py` recomputes every headline number from the raw logs (row
+  counts, sentinels, arm scores, set identities, corrected composite,
+  difficulty split, subset integrity). Exit 0.
+- `probe_blindspots.py` closes three gate blind spots: (P1) zero public cases
+  have empty expected outputs (no vacuous-pass class); (P2) all 15 arm-C
+  verdicts independently re-executed from the saved generations — 15/15 agree;
+  (P3) sampling uncertainty made explicit: **20/30 = 67%, Wilson 95% CI
+  [49%, 81%] — n=30, read the CI, not the point estimate.**
+- Grading environment: python3 on the nucbox (3.12); the shipped
+  `lcb-bench.py` is the exact canonical grader (byte-verified against the box
+  copy after a stale-version mixup was caught and fixed during the gate).
+- Arm A/B generations were not saved (fixed for later arms); arm A was
+  re-fired with saves as a reproduction check — see `lcb-30-arepro-results.log`.
 
 ## Raw
 - `lcb-30-results.log` — arm A (30 rows + sentinel)

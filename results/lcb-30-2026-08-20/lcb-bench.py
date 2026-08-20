@@ -25,6 +25,8 @@ import json, os, random, re, subprocess, sys, tempfile, time, urllib.request
 
 DATASET = os.environ.get("LCB_DATASET", os.path.join(os.path.dirname(os.path.abspath(__file__)), "lcb-test6.jsonl"))
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), os.environ.get("LCB_OUT", "lcb-30-results.log"))
+MAXTOK = int(os.environ.get("LCB_MAX_TOKENS", "2048"))
+ONLY = set(os.environ.get("LCB_ONLY", "").split(",")) - {""}
 URL = os.environ.get("BENCH_URL", "http://127.0.0.1:46377/v1/chat/completions")
 LABEL = os.environ.get("LCB_LABEL", "champion-q4-lcb30")
 N_PER_DIFF = 10
@@ -55,10 +57,16 @@ def build_prompt(r):
         p += "\n\n" + sc
     return p + PROMPT_SUFFIX
 
+THINK = os.environ.get("LCB_THINK", "0") == "1"
+THINK_BUDGET = int(os.environ.get("LCB_THINK_BUDGET", "2048"))
+
 def ask(prompt):
+    kwargs = {"enable_thinking": THINK}
     body = {"messages": [{"role": "user", "content": prompt}],
-            "max_tokens": 2048, "temperature": 0.0,
-            "chat_template_kwargs": {"enable_thinking": False}}
+            "max_tokens": MAXTOK, "temperature": 0.0,
+            "chat_template_kwargs": kwargs}
+    if THINK:
+        body["reasoning_budget_tokens"] = THINK_BUDGET
     req = urllib.request.Request(URL, data=json.dumps(body).encode(),
                                  headers={"Content-Type": "application/json"})
     t0 = time.time()
@@ -79,8 +87,21 @@ def extract_code(text):
 
 FUNC_WRAP = """
 import json, sys
+def _parse_arg(line):
+    line = line.strip()
+    try:
+        return json.loads(line)
+    except Exception:
+        return line
 if __name__ == "__main__":
-    _args = json.loads(sys.stdin.read())
+    _raw = sys.stdin.read()
+    _lines = [l for l in _raw.split(chr(10)) if l.strip() != ""]
+    try:
+        _args = json.loads(_raw)
+        if not isinstance(_args, list):
+            _args = [_args]
+    except Exception:
+        _args = [_parse_arg(l) for l in _lines]
     _sol = Solution()
     _out = _sol.{method}(*_args)
     try:
@@ -102,14 +123,14 @@ def run_case(code, r, case):
             m = re.search(r"def\s+(\w+)\s*\(\s*self", sc)
             if not m:
                 return False, "no-entry-method"
-            f.write(sc + "\n" + FUNC_WRAP.format(method=m.group(1)))
-            payload = code + "\n"
+            guard = re.search(r"^if __name__ == .__main__.", code, re.M)
+            body = code[:guard.start()] if guard else code
+            f.write(body + "\n" + FUNC_WRAP.format(method=m.group(1)))
         else:
             f.write(code)
-            payload = None
         path = f.name
     try:
-        res = subprocess.run(["python3", path], input=case.get("input", "") if payload is None else _func_payload(case),
+        res = subprocess.run(["python3", path], input=case.get("input", ""),
                              capture_output=True, text=True, timeout=10)
         os.unlink(path)
         if testtype == "functional":
@@ -124,10 +145,7 @@ def run_case(code, r, case):
         return False, str(e)[:80]
 
 def _func_payload(case):
-    inp = case.get("input", "").strip()
-    if inp.startswith("["):
-        return inp
-    return json.dumps([inp])
+    return case.get("input", "")
 
 def _func_match(stdout, expected):
     got = stdout.strip()
@@ -150,6 +168,8 @@ def grade(code, r):
 if __name__ == "__main__":
     rows = [json.loads(l) for l in open(DATASET)]
     subset = select_subset(rows)
+    if ONLY:
+        subset = [r for r in subset if r["question_id"] in ONLY]
 
     if "--dry-run" in sys.argv:
         # P11: grader must pass a known-good solution and fail garbage.
@@ -176,16 +196,22 @@ if __name__ == "__main__":
             j, wall = ask(build_prompt(r))
             content = (j["choices"][0]["message"]["content"] or "").strip()
             fr = j["choices"][0].get("finish_reason")
+            think_ch = len(j["choices"][0]["message"].get("reasoning_content") or "")
             code = extract_code(content)
+            savedir = os.environ.get("LCB_SAVE")
+            if savedir:
+                os.makedirs(savedir, exist_ok=True)
+                open(os.path.join(savedir, qid + ".py"), "w").write(code or "")
+                open(os.path.join(savedir, qid + ".raw.txt"), "w").write(content)
             if code is None:
-                lines.append(f"[{LABEL}] {qid} ({r['difficulty']}): FAIL no-code-extracted fr={fr} {wall:.0f}s")
+                lines.append(f"[{LABEL}] {qid} ({r['difficulty']}): FAIL no-code-extracted fr={fr} {wall:.0f}s think={think_ch}ch")
                 continue
             ok, err, ncases = grade(code, r)
             if ok:
                 passed += 1
-                lines.append(f"[{LABEL}] {qid} ({r['difficulty']}): PASS {wall:.0f}s fr={fr} cases={ncases}")
+                lines.append(f"[{LABEL}] {qid} ({r['difficulty']}): PASS {wall:.0f}s fr={fr} cases={ncases} think={think_ch}ch")
             else:
-                lines.append(f"[{LABEL}] {qid} ({r['difficulty']}): FAIL ({err}) {wall:.0f}s fr={fr} cases={ncases}")
+                lines.append(f"[{LABEL}] {qid} ({r['difficulty']}): FAIL ({err}) {wall:.0f}s fr={fr} cases={ncases} think={think_ch}ch")
         except Exception as e:
             lines.append(f"[{LABEL}] {qid} ({r['difficulty']}): ERROR {str(e)[:80]}")
         print(lines[-1], flush=True)
