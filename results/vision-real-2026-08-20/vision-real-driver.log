@@ -1,0 +1,17 @@
+[vr 18:48:35Z] pre-flight OK (models present, edge 35C)
+[vr 18:48:36Z] dry-run 6/6 (vision-real-dryrun.log)
+[vr 18:48:39Z] champion stopped
+[vr 18:48:39Z] launched mmproj server PID 1890026, waiting health
+[vr 18:49:11Z] server healthy, load+init 32s
+[vr 18:49:12Z] text control OK
+[champion-q4-realui] R1 (bar-chart.png): HIT 4.0s fr=stop think=0ch ans='Beta'
+[champion-q4-realui] R2 (table.png): HIT 4.4s fr=stop think=0ch ans='312'
+[champion-q4-realui] R3 (form.png): HIT 4.9s fr=stop think=0ch ans='simon@kyanitelabs.tech'
+[champion-q4-realui] R4 (terminal.png): HIT 4.5s fr=stop think=0ch ans='503'
+[champion-q4-realui] R5 (progress.png): HIT 4.2s fr=stop think=0ch ans='music-library'
+[champion-q4-realui] R6 (line-chart.png): HIT 4.4s fr=stop think=0ch ans='up'
+VISION-REAL: 6/6 correct
+ROWS=6
+[vr 18:49:39Z] battery done: VISION-REAL: 6/6 correct
+[vr 18:50:10Z] champion restored: PID=1894770 kv_k=q4_0
+[vr 18:50:10Z] VISION-REAL-WINDOW COMPLETE

@@ -1,0 +1,6 @@
+[dry] bar-chart.png: exists=True size=20089 expect~>beta -> OK
+[dry] table.png: exists=True size=27284 expect~>312 -> OK
+[dry] form.png: exists=True size=21590 expect~>simon@kyanitelabs.tech -> OK
+[dry] terminal.png: exists=True size=25968 expect~>503 -> OK
+[dry] progress.png: exists=True size=17548 expect~>music-library -> OK
+[dry] line-chart.png: exists=True size=12974 expect~>up -> OK
