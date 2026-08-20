@@ -1,0 +1,104 @@
+[lcb100-base] 3723 (easy): PASS 17s fr=stop cases=2 think=0ch
+[lcb100-base] abc392_b (easy): PASS 5s fr=stop cases=3 think=0ch
+[lcb100-base] abc387_a (easy): PASS 2s fr=stop cases=4 think=0ch
+[lcb100-base] abc400_a (easy): PASS 3s fr=stop cases=3 think=0ch
+[lcb100-base] abc396_a (easy): PASS 4s fr=stop cases=5 think=0ch
+[lcb100-base] abc388_a (easy): PASS 2s fr=stop cases=2 think=0ch
+[lcb100-base] 3832 (easy): FAIL (case-mismatch) 82s fr=stop cases=2 think=0ch
+[lcb100-base] 3778 (easy): FAIL (case-mismatch) 9s fr=stop cases=2 think=0ch
+[lcb100-base] abc399_b (easy): PASS 13s fr=stop cases=4 think=0ch
+[lcb100-base] abc391_b (easy): PASS 8s fr=stop cases=2 think=0ch
+[lcb100-base] abc389_a (easy): PASS 2s fr=stop cases=2 think=0ch
+[lcb100-base] abc398_a (easy): FAIL no-code-extracted fr=length 92s think=0ch
+[lcb100-base] 3709 (easy): PASS 83s fr=length cases=2 think=0ch
+[lcb100-base] abc390_b (easy): PASS 40s fr=stop cases=3 think=0ch
+[lcb100-base] 3817 (easy): PASS 20s fr=stop cases=2 think=0ch
+[lcb100-base] abc394_a (easy): PASS 2s fr=stop cases=3 think=0ch
+[lcb100-base] 3799 (easy): FAIL (case-mismatch) 14s fr=stop cases=4 think=0ch
+[lcb100-base] abc393_b (easy): PASS 57s fr=stop cases=3 think=0ch
+[lcb100-base] abc399_a (easy): PASS 4s fr=stop cases=4 think=0ch
+[lcb100-base] abc397_a (easy): PASS 3s fr=stop cases=3 think=0ch
+[lcb100-base] 3773 (easy): FAIL (case-mismatch) 43s fr=stop cases=2 think=0ch
+[lcb100-base] abc387_b (easy): PASS 4s fr=stop cases=3 think=0ch
+[lcb100-base] abc400_b (easy): PASS 10s fr=stop cases=4 think=0ch
+[lcb100-base] 3811 (easy): PASS 34s fr=stop cases=2 think=0ch
+[lcb100-base] abc395_b (easy): FAIL no-code-extracted fr=length 77s think=0ch
+[lcb100-base] abc396_d (medium): PASS 44s fr=stop cases=3 think=0ch
+[lcb100-base] arc194_a (medium): FAIL no-code-extracted fr=length 113s think=0ch
+[lcb100-base] 3751 (medium): FAIL no-code-extracted fr=length 104s think=0ch
+[lcb100-base] 3805 (medium): FAIL no-code-extracted fr=length 79s think=0ch
+[lcb100-base] 3743 (medium): FAIL no-code-extracted fr=length 111s think=0ch
+[lcb100-base] abc399_d (medium): FAIL no-code-extracted fr=length 93s think=0ch
+[lcb100-base] abc399_c (medium): PASS 48s fr=stop cases=3 think=0ch
+[lcb100-base] 3722 (medium): FAIL (case-mismatch) 87s fr=length cases=2 think=0ch
+[lcb100-base] 3721 (medium): FAIL (case-mismatch) 100s fr=length cases=3 think=0ch
+[lcb100-base] 3776 (medium): FAIL no-code-extracted fr=length 94s think=0ch
+[lcb100-base] 3714 (medium): FAIL no-code-extracted fr=length 118s think=0ch
+[lcb100-base] 3791 (medium): PASS 89s fr=length cases=2 think=0ch
+[lcb100-base] abc398_c (medium): PASS 81s fr=stop cases=2 think=0ch
+[lcb100-base] 3737 (medium): FAIL no-code-extracted fr=length 106s think=0ch
+[lcb100-base] 3759 (medium): PASS 101s fr=length cases=2 think=0ch
+[lcb100-base] 3763 (medium): FAIL (case-mismatch) 91s fr=length cases=2 think=0ch
+[lcb100-base] 3786 (medium): PASS 93s fr=length cases=2 think=0ch
+[lcb100-base] 3748 (medium): FAIL (case-mismatch) 66s fr=stop cases=3 think=0ch
+[lcb100-base] arc195_a (medium): FAIL (case-mismatch) 94s fr=length cases=3 think=0ch
+[lcb100-base] abc395_c (medium): PASS 36s fr=stop cases=3 think=0ch
+[lcb100-base] abc387_c (medium): FAIL (case-mismatch) 108s fr=length cases=3 think=0ch
+[lcb100-base] 3779 (medium): FAIL no-code-extracted fr=length 104s think=0ch
+[lcb100-base] abc397_b (medium): FAIL no-code-extracted fr=length 95s think=0ch
+[lcb100-base] abc388_c (medium): PASS 50s fr=stop cases=3 think=0ch
+[lcb100-base] arc191_a (medium): FAIL no-code-extracted fr=length 112s think=0ch
+[lcb100-base] abc397_c (medium): FAIL (case-mismatch) 67s fr=stop cases=2 think=0ch
+[lcb100-base] 3760 (medium): FAIL no-code-extracted fr=length 94s think=0ch
+[lcb100-base] abc389_d (medium): FAIL no-code-extracted fr=length 85s think=0ch
+[lcb100-base] 3809 (medium): PASS 81s fr=length cases=3 think=0ch
+[lcb100-base] 3771 (medium): FAIL no-code-extracted fr=length 114s think=0ch
+[lcb100-base] 3750 (medium): FAIL no-code-extracted fr=length 104s think=0ch
+[lcb100-base] abc390_d (medium): FAIL (case-mismatch) 109s fr=length cases=3 think=0ch
+[lcb100-base] 3677 (medium): FAIL no-code-extracted fr=length 84s think=0ch
+[lcb100-base] 3785 (medium): PASS 86s fr=length cases=3 think=0ch
+[lcb100-base] 3793 (medium): PASS 95s fr=length cases=4 think=0ch
+[lcb100-base] arc193_b (hard): FAIL no-code-extracted fr=length 86s think=0ch
+[lcb100-base] 3696 (hard): FAIL no-code-extracted fr=length 90s think=0ch
+[lcb100-base] arc194_e (hard): FAIL no-code-extracted fr=length 90s think=0ch
+[lcb100-base] 3781 (hard): FAIL no-code-extracted fr=length 98s think=0ch
+[lcb100-base] abc393_d (hard): PASS 93s fr=length cases=3 think=0ch
+[lcb100-base] 3733 (hard): FAIL (case-mismatch) 103s fr=length cases=4 think=0ch
+[lcb100-base] abc397_g (hard): FAIL no-code-extracted fr=length 110s think=0ch
+[lcb100-base] arc192_d (hard): FAIL no-code-extracted fr=length 90s think=0ch
+[lcb100-base] abc396_f (hard): FAIL no-code-extracted fr=length 94s think=0ch
+[lcb100-base] abc391_f (hard): FAIL no-code-extracted fr=length 92s think=0ch
+[lcb100-base] abc389_g (hard): FAIL no-code-extracted fr=length 122s think=0ch
+[lcb100-base] abc391_e (hard): FAIL no-code-extracted fr=length 104s think=0ch
+[lcb100-base] arc190_d (hard): FAIL no-code-extracted fr=length 112s think=0ch
+[lcb100-base] arc192_e (hard): FAIL no-code-extracted fr=length 107s think=0ch
+[lcb100-base] abc400_e (hard): PASS 90s fr=length cases=1 think=0ch
+[lcb100-base] 3692 (hard): FAIL (case-mismatch) 90s fr=length cases=4 think=0ch
+[lcb100-base] abc389_f (hard): FAIL no-code-extracted fr=length 104s think=0ch
+[lcb100-base] arc196_a (hard): FAIL no-code-extracted fr=length 102s think=0ch
+[lcb100-base] 3789 (hard): FAIL no-code-extracted fr=length 105s think=0ch
+[lcb100-base] abc390_f (hard): FAIL no-code-extracted fr=length 109s think=0ch
+[lcb100-base] abc397_f (hard): FAIL no-code-extracted fr=length 108s think=0ch
+[lcb100-base] arc195_c (hard): FAIL no-code-extracted fr=length 108s think=0ch
+[lcb100-base] 3762 (hard): FAIL no-code-extracted fr=length 105s think=0ch
+[lcb100-base] 3739 (hard): FAIL no-code-extracted fr=length 98s think=0ch
+[lcb100-base] arc193_d (hard): FAIL (case-mismatch) 100s fr=length cases=1 think=0ch
+[lcb100-base] abc398_f (hard): FAIL no-code-extracted fr=length 111s think=0ch
+[lcb100-base] abc393_f (hard): FAIL no-code-extracted fr=length 128s think=0ch
+[lcb100-base] abc399_e (hard): FAIL no-code-extracted fr=length 120s think=0ch
+[lcb100-base] abc388_e (hard): PASS 91s fr=length cases=3 think=0ch
+[lcb100-base] arc193_a (hard): FAIL no-code-extracted fr=length 122s think=0ch
+[lcb100-base] arc191_d (hard): FAIL no-code-extracted fr=length 121s think=0ch
+[lcb100-base] abc391_g (hard): FAIL no-code-extracted fr=length 110s think=0ch
+[lcb100-base] abc398_d (hard): FAIL no-code-extracted fr=length 89s think=0ch
+[lcb100-base] 3801 (hard): PASS 116s fr=length cases=2 think=0ch
+[lcb100-base] arc192_b (hard): FAIL no-code-extracted fr=length 121s think=0ch
+[lcb100-base] abc390_g (hard): FAIL no-code-extracted fr=length 104s think=0ch
+[lcb100-base] abc389_e (hard): FAIL no-code-extracted fr=length 112s think=0ch
+[lcb100-base] abc387_f (hard): FAIL no-code-extracted fr=length 112s think=0ch
+[lcb100-base] 3717 (hard): FAIL no-code-extracted fr=length 117s think=0ch
+[lcb100-base] arc196_d (hard): FAIL no-code-extracted fr=length 105s think=0ch
+SCORE: 34/100 = 34%
+LABEL=lcb100-base N=100
+LCB-30 DONE
+ROWS=100
