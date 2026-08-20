@@ -1,0 +1,44 @@
+```python
+import sys
+
+def main():
+    input = sys.stdin.readline
+    N = int(input())
+    A = list(map(int, input().split()))
+    B = list(map(int, input().split()))
+    C = list(map(int, input().split()))
+
+    down = []  # A_i = 1, B_i = 0: must be turned off
+    up = []    # A_i = 0, B_i = 1: must be turned on
+    base = 0   # constant 1s that never change
+
+    for a, b, c in zip(A, B, C):
+        if a == b:
+            if a == 1:
+                base += c
+        elif a == 1:
+            down.append(c)
+        else:
+            up.append(c)
+
+    down.sort(reverse=True)
+    up.sort()
+
+    m = len(down) + len(up)
+    ans = base * m
+
+    # Turn off indices first, in decreasing order of C.
+    # If turned off at position t (1-indexed), it contributes for t-1 operations.
+    for t, c in enumerate(down, start=1):
+        ans += c * (t - 1)
+
+    # Then turn on indices, in increasing order of C.
+    # If turned on at position t, it contributes for m - t + 1 operations.
+    for t, c in enumerate(up, start=len(down) + 1):
+        ans += c * (m - t + 1)
+
+    print(ans)
+
+if __name__ == "__main__":
+    main()
+```

@@ -1,0 +1,34 @@
+[champion-q4-lcb30] abc394_a (easy): PASS 2s fr=stop cases=3
+[champion-q4-lcb30] abc396_b (easy): PASS 33s fr=stop cases=2
+[champion-q4-lcb30] 3817 (easy): FAIL (case-mismatch) 18s fr=stop cases=2
+[champion-q4-lcb30] abc392_a (easy): PASS 4s fr=stop cases=2
+[champion-q4-lcb30] abc399_a (easy): PASS 4s fr=stop cases=4
+[champion-q4-lcb30] abc393_a (easy): PASS 20s fr=stop cases=2
+[champion-q4-lcb30] abc390_b (easy): PASS 43s fr=stop cases=3
+[champion-q4-lcb30] abc395_a (easy): PASS 5s fr=stop cases=3
+[champion-q4-lcb30] 3723 (easy): FAIL (case-mismatch) 36s fr=stop cases=2
+[champion-q4-lcb30] abc391_b (easy): PASS 9s fr=stop cases=2
+[champion-q4-lcb30] abc400_d (medium): FAIL no-code-extracted fr=length 127s
+[champion-q4-lcb30] arc194_a (medium): FAIL no-code-extracted fr=length 128s
+[champion-q4-lcb30] abc397_c (medium): PASS 48s fr=stop cases=2
+[champion-q4-lcb30] abc399_d (medium): FAIL no-code-extracted fr=length 88s
+[champion-q4-lcb30] abc398_b (medium): PASS 40s fr=stop cases=4
+[champion-q4-lcb30] 3760 (medium): FAIL (case-mismatch) 89s fr=length cases=3
+[champion-q4-lcb30] 3805 (medium): FAIL no-code-extracted fr=length 85s
+[champion-q4-lcb30] abc395_c (medium): PASS 50s fr=stop cases=3
+[champion-q4-lcb30] 3793 (medium): FAIL (case-mismatch) 92s fr=length cases=4
+[champion-q4-lcb30] abc390_c (medium): PASS 99s fr=length cases=3
+[champion-q4-lcb30] abc398_g (hard): PASS 86s fr=length cases=3
+[champion-q4-lcb30] 3733 (hard): FAIL no-code-extracted fr=length 100s
+[champion-q4-lcb30] arc196_a (hard): FAIL no-code-extracted fr=length 110s
+[champion-q4-lcb30] arc193_b (hard): FAIL no-code-extracted fr=length 93s
+[champion-q4-lcb30] arc195_d (hard): FAIL no-code-extracted fr=length 113s
+[champion-q4-lcb30] abc395_f (hard): FAIL no-code-extracted fr=length 93s
+[champion-q4-lcb30] arc196_b (hard): FAIL no-code-extracted fr=length 114s
+[champion-q4-lcb30] arc194_d (hard): FAIL no-code-extracted fr=length 107s
+[champion-q4-lcb30] abc398_f (hard): FAIL no-code-extracted fr=length 98s
+[champion-q4-lcb30] arc194_c (hard): FAIL no-code-extracted fr=length 91s
+SCORE: 13/30 = 43%
+LABEL=champion-q4-lcb30 N=30
+LCB-30 DONE
+ROWS=30

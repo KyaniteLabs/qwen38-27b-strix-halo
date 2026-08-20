@@ -1,0 +1,19 @@
+[lcb30-think2048] abc400_d (medium): PASS 181s fr=stop cases=4 think=8130ch
+[lcb30-think2048] arc194_a (medium): PASS 190s fr=stop cases=3 think=7806ch
+[lcb30-think2048] abc399_d (medium): FAIL (case-mismatch) 168s fr=stop cases=1 think=7675ch
+[lcb30-think2048] 3760 (medium): FAIL (case-mismatch) 156s fr=stop cases=3 think=7309ch
+[lcb30-think2048] 3805 (medium): PASS 164s fr=stop cases=4 think=6550ch
+[lcb30-think2048] 3793 (medium): PASS 165s fr=stop cases=4 think=7526ch
+[lcb30-think2048] 3733 (hard): FAIL (case-mismatch) 231s fr=stop cases=4 think=7718ch
+[lcb30-think2048] arc196_a (hard): FAIL (case-mismatch) 167s fr=stop cases=3 think=7594ch
+[lcb30-think2048] arc193_b (hard): FAIL (case-mismatch) 151s fr=stop cases=2 think=6309ch
+[lcb30-think2048] arc195_d (hard): FAIL (case-mismatch) 156s fr=stop cases=1 think=6269ch
+[lcb30-think2048] abc395_f (hard): FAIL (case-mismatch) 147s fr=stop cases=4 think=6104ch
+[lcb30-think2048] arc196_b (hard): FAIL (case-mismatch) 150s fr=stop cases=1 think=7049ch
+[lcb30-think2048] arc194_d (hard): FAIL (case-mismatch) 199s fr=stop cases=2 think=7676ch
+[lcb30-think2048] abc398_f (hard): PASS 167s fr=stop cases=3 think=7197ch
+[lcb30-think2048] arc194_c (hard): FAIL (case-mismatch) 166s fr=stop cases=3 think=6993ch
+SCORE: 5/15 = 33%
+LABEL=lcb30-think2048 N=15
+LCB-30 DONE
+ROWS=15

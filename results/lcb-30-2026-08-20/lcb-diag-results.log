@@ -1,0 +1,5 @@
+[lcb-diag] arc194_c (hard): FAIL (case-mismatch) 165s fr=stop cases=3
+SCORE: 0/1 = 0%
+LABEL=lcb-diag N=1
+LCB-30 DONE
+ROWS=1

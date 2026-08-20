@@ -1,0 +1,19 @@
+[lcb30-tok4096] abc400_d (medium): FAIL no-code-extracted fr=length 233s
+[lcb30-tok4096] arc194_a (medium): FAIL no-code-extracted fr=length 239s
+[lcb30-tok4096] abc399_d (medium): FAIL no-code-extracted fr=length 232s
+[lcb30-tok4096] 3760 (medium): FAIL (case-mismatch) 131s fr=stop cases=3
+[lcb30-tok4096] 3805 (medium): FAIL no-code-extracted fr=length 178s
+[lcb30-tok4096] 3793 (medium): FAIL (case-mismatch) 79s fr=stop cases=4
+[lcb30-tok4096] 3733 (hard): FAIL no-code-extracted fr=length 207s
+[lcb30-tok4096] arc196_a (hard): FAIL no-code-extracted fr=length 182s
+[lcb30-tok4096] arc193_b (hard): FAIL no-code-extracted fr=length 204s
+[lcb30-tok4096] arc195_d (hard): FAIL no-code-extracted fr=length 208s
+[lcb30-tok4096] abc395_f (hard): FAIL no-code-extracted fr=length 171s
+[lcb30-tok4096] arc196_b (hard): FAIL no-code-extracted fr=length 194s
+[lcb30-tok4096] arc194_d (hard): FAIL (case-mismatch) 216s fr=length cases=2
+[lcb30-tok4096] abc398_f (hard): FAIL no-code-extracted fr=length 180s
+[lcb30-tok4096] arc194_c (hard): FAIL no-code-extracted fr=length 150s
+SCORE: 0/15 = 0%
+LABEL=lcb30-tok4096 N=15
+LCB-30 DONE
+ROWS=15

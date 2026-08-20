@@ -1,0 +1,116 @@
+import sys
+
+class Solution:
+    def maxActiveSectionsAfterTrade(self, s: str) -> int:
+        n = len(s)
+        initial = s.count('1')
+        best = initial
+
+        # Augmented string: '1' + s + '1'
+        t = '1' + s + '1'
+        m = len(t)
+
+        # Collect lengths of zero-runs and internal one-runs.
+        # Since t starts and ends with '1', runs alternate:
+        # 1-run, 0-run, 1-run, 0-run, ..., 1-run
+        zero_runs = []
+        internal_one_runs = []
+
+        i = 0
+        # Skip first 1-run
+        while i < m and t[i] == '1':
+            i += 1
+
+        while i < m:
+            # Zero-run
+            j = i
+            while j < m and t[j] == '0':
+                j += 1
+            zero_runs.append(j - i)
+            i = j
+
+            # One-run
+            j = i
+            while j < m and t[j] == '1':
+                j += 1
+            one_len = j - i
+            # If this is the final sentinel 1-run, it is not internal.
+            if j < m:
+                internal_one_runs.append(one_len)
+            i = j
+
+        # For each internal 1-run, if we remove it and then fill the merged zero-run,
+        # net gain is left_zero + right_zero.
+        # zero_runs[k] is the zero-run before internal_one_runs[k].
+        # zero_runs[k + 1] is the zero-run after internal_one_runs[k].
+        for k, one_len in enumerate(internal_one_runs):
+            left_zero = zero_runs[k]
+            right_zero = zero_runs[k + 1]
+            best = max(best, initial + left_zero + right_zero)
+
+            # Also consider removing this 1-run and filling some other zero-run.
+            # Net gain = other_zero - one_len.
+            # The best other zero-run is the maximum zero-run not equal to left/right.
+            # We can compute this efficiently below.
+
+        # Efficiently evaluate "remove one internal 1-run, fill another zero-run".
+        if zero_runs:
+            max_zero = max(zero_runs)
+            # Count of maximum zero-runs, to know if an alternative max exists.
+            max_count = zero_runs.count(max_zero)
+
+            for k, one_len in enumerate(internal_one_runs):
+                left_zero = zero_runs[k]
+                right_zero = zero_runs[k + 1]
+
+                # Choose the largest zero-run that is not the left or right merged part.
+                if max_count >= 3 or (max_count == 2 and (left_zero != max_zero or right_zero != max_zero)):
+                    best_zero = max_zero
+                else:
+                    # Need second largest zero-run if all max zero-runs are blocked.
+                    # Since n <= 1e5, a simple second-max computation is fine.
+                    # But to keep O(n), compute second max once.
+                    pass
+
+        # Simpler O(number of runs) approach for the alternative case:
+        # Precompute prefix/suffix maximum zero-run lengths.
+        if zero_runs:
+            z = zero_runs
+            q = len(z)
+            pref = [0] * q
+            suff = [0] * q
+            pref[0] = z[0]
+            for i in range(1, q):
+                pref[i] = max(pref[i - 1], z[i])
+            suff[q - 1] = z[q - 1]
+            for i in range(q - 2, -1, -1):
+                suff[i] = max(suff[i + 1], z[i])
+
+            for k, one_len in enumerate(internal_one_runs):
+                left_idx = k
+                right_idx = k + 1
+
+                # Maximum zero-run outside [left_idx, right_idx]
+                candidates = []
+                if left_idx > 0:
+                    candidates.append(pref[left_idx - 1])
+                if right_idx + 1 < q:
+                    candidates.append(suff[right_idx + 1])
+
+                if candidates:
+                    best_zero = max(candidates)
+                    best = max(best, initial + best_zero - one_len)
+
+        return best
+
+
+def main():
+    data = sys.stdin.read().strip().split()
+    if not data:
+        return
+    s = data[0].strip()
+    sol = Solution()
+    print(sol.maxActiveSectionsAfterTrade(s))
+
+if __name__ == "__main__":
+    main()

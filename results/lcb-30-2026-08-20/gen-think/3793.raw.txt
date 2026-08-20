@@ -1,0 +1,51 @@
+```python
+import sys
+import re
+
+class Solution:
+    def longestPalindrome(self, s: str, t: str) -> int:
+        n, m = len(s), len(t)
+        ans = 0
+
+        # Generate all substrings, including the empty substring.
+        substrings_s = [s[i:j] for i in range(n + 1) for j in range(i, n + 1)]
+        substrings_t = [t[i:j] for i in range(m + 1) for j in range(i, m + 1)]
+
+        for a in substrings_s:
+            for b in substrings_t:
+                candidate = a + b
+                if candidate == candidate[::-1]:
+                    ans = max(ans, len(candidate))
+
+        return ans
+
+
+def main():
+    data = sys.stdin.read()
+
+    # Prefer quoted strings, e.g. s = "abc", t = "def"
+    quoted = re.findall(r'"([^"]*)"', data)
+    if len(quoted) >= 2:
+        s, t = quoted[0], quoted[1]
+    else:
+        # Fallback: split by whitespace and clean tokens.
+        tokens = []
+        for token in data.split():
+            token = token.strip().strip(',').strip()
+            if '=' in token:
+                token = token.split('=', 1)[1].strip()
+            token = token.strip('"').strip("'")
+            if token:
+                tokens.append(token)
+
+        if len(tokens) >= 2:
+            s, t = tokens[0], tokens[1]
+        else:
+            return
+
+    print(Solution().longestPalindrome(s, t))
+
+
+if __name__ == "__main__":
+    main()
+```
