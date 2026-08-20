@@ -1,0 +1,8 @@
+PARSER-PROBE-PASS
+[remap s4419] depth 10%: HIT fr=stop wall=1993s ptok=198227 tb=64C ta=74C ans='GRANITE-3319-BRAVO'
+[remap s4419] depth 25%: HIT fr=stop wall=1996s ptok=198227 tb=76C ta=74C ans='TOKFLINT-7702-KILO'
+[remap s4419] depth 35%: HIT fr=stop wall=2010s ptok=198226 tb=76C ta=74C ans='SANDSTONE-5548-ECHO'
+[remap s4419] depth 75%: HIT fr=stop wall=2013s ptok=198229 tb=74C ta=73C ans='PIRATE-1290-FOXTROT'
+[remap s4419] depth 90%: HIT fr=stop wall=2010s ptok=198227 tb=74C ta=74C ans='JASMINE-2207-ECHO'
+[remap s4419] TOTAL 5/5 (+d50 HIT earlier tonight = 6/6 curve)
+ROWS=5
