@@ -29,3 +29,35 @@ model/GDN behavior.
 ## Raw
 - `run-partial.log` — this run (parser probe + the HIT line)
 - Pre-revert rows: ../deep-context-2026-08-18/sweep2.log
+
+## UPDATE 2026-08-20 00:35Z — DEPTH REMAP COMPLETE: 6/6, contamination CONFIRMED
+Post-revert curve (byte-identical needles, seed 4419, 198k, temp 0):
+
+| depth | pre-revert (08-18 sweep2) | post-revert (tonight) |
+|---|---|---|
+| 10% | MISS — ans='ok' attractor | **HIT** GRANITE-3319-BRAVO |
+| 25% | HIT | HIT TOKFLINT-7702-KILO |
+| 35% | MISS — markdown attractor, fr=length | **HIT** SANDSTONE-5548-ECHO |
+| 50% | MISS — ans='ok' (ptok=198228, token-identical) | **HIT** COBALT-8835-DELTA |
+| 75% | MISS — markdown attractor, fr=length | **HIT** PIRATE-1290-FOXTROT |
+| 90% | (never completed pre-revert — sweep died) | **HIT** JASMINE-2207-ECHO |
+
+**6/6 exact retrieval post-revert; zero attractor outputs; every cell fr=stop.**
+The anchor pair: d50, token-identical prompts (ptok=198228 both eras) —
+MISS('ok') pre-revert, exact-code HIT post-revert; only delta = c7d8722 revert.
+
+Pre-revert behavior was not uniformly-dead either: the (confounded) horizon
+re-fire went 2/3 with an attractor MISS — i.e. the bug made long-context
+retrieval UNRELIABLE, and the revert made it consistent.
+
+## Verdict
+The pre-revert deep-context failure map — the "degenerate basin" framing, the
+attractor outputs, "no reliable needle retrieval at any tested length" — was
+substantially the llama.cpp c7d8722 host-buffer bug on this integrated GPU,
+not model/GDN behavior. On the reverted build, this rig retrieves arbitrary-ID
+needles at ALL tested depths at 198k. Published mechanism claims built on
+pre-revert measurements need corrective addenda (board D78/D79).
+
+## Raw
+- `depth-remap-results.log` — 5 cells + TOTAL + ROWS sentinel
+- `depth-remap-run.log` — full run incl. parser probe
