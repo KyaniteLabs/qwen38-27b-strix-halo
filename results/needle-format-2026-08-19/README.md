@@ -61,3 +61,10 @@ pre-revert measurements need corrective addenda (board D78/D79).
 ## Raw
 - `depth-remap-results.log` — 5 cells + TOTAL + ROWS sentinel
 - `depth-remap-run.log` — full run incl. parser probe
+
+## UPDATE 2026-08-20 05:58Z — NATIVE CEILING TESTED: HIT
+`nativemax-results.log`: same instrument, d50 LIMA needle, haystack extended to
+7,630 paragraphs — **prompt_tokens = 261,130 of the 262,144 window (99.6%,
+server-verified), exact code retrieved, finish_reason=stop, 53-min prefill.**
+The corrected retrieval claim now holds at the literal native ceiling, not just
+at 198k. "Tested at native ceiling" is now a true sentence.
