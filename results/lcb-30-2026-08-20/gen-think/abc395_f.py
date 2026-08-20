@@ -1,0 +1,43 @@
+import sys
+
+def main():
+    input = sys.stdin.readline
+    N, X = map(int, input().split())
+    U = [0] * N
+    D = [0] * N
+    max_h = 10**18
+    for i in range(N):
+        u, d = map(int, input().split())
+        U[i] = u
+        D[i] = d
+        s = u + d
+        if s < max_h:
+            max_h = s
+
+    def feasible(h):
+        # possible range of current upper tooth length
+        lo = max(0, h - D[0])
+        hi = min(U[0], h)
+        if lo > hi:
+            return False
+        for i in range(1, N):
+            lo = max(lo, max(0, h - D[i]) - X)
+            hi = min(hi, min(U[i], h) + X)
+            if lo > hi:
+                return False
+        return True
+
+    ok = 0
+    ng = max_h + 1
+    while ng - ok > 1:
+        mid = (ok + ng) // 2
+        if feasible(mid):
+            ok = mid
+        else:
+            ng = mid
+
+    total = sum(U[i] + D[i] for i in range(N))
+    print(total - N * ok)
+
+if __name__ == "__main__":
+    main()

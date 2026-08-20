@@ -1,0 +1,46 @@
+import sys
+
+def solve():
+    data = list(map(int, sys.stdin.buffer.read().split()))
+    t = data[0]
+    idx = 1
+    out = []
+
+    for _ in range(t):
+        n = data[idx]
+        idx += 1
+        a = data[idx:idx + n]
+        idx += n
+
+        # Count occurrences of each value.
+        cnt = [0] * (n + 1)
+        for x in a:
+            cnt[x] += 1
+
+        # For each value, find the position of its last occurrence.
+        last = [0] * (n + 1)
+        for i, x in enumerate(a, 1):
+            last[x] = i
+
+        # For each value, count how many elements before its last occurrence
+        # are not equal to it.
+        pref = [0] * (n + 1)
+        for i, x in enumerate(a, 1):
+            pref[i] = pref[i - 1] + 1
+
+        ans = 0
+        for x in range(1, n + 1):
+            c = cnt[x]
+            if c == 0:
+                continue
+            l = last[x]
+            # Number of non-x elements before the last x.
+            swaps = pref[l] - c
+            ans += swaps + 1
+
+        out.append(str(ans))
+
+    sys.stdout.write("\n".join(out))
+
+if __name__ == "__main__":
+    solve()
