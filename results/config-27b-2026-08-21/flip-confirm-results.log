@@ -1,0 +1,9 @@
+gsm8k-q4 exact_match_strict=0.7 flexible=NA
+[27b-q8-198k-a-gtt] loaded_gtt=29937MB (post-load, pre-fill; best-effort sysfs)
+[27b-q8-198k-a-fill] wall=1972s ptok=198164 target=198235 seed=8844 needle_tok=105257 (53% depth) fr=length tb=53C ta=73C gtt_after=30157MB
+[27b-q8-198k-a-decode] wall=2.1s ctok=17 tok_s=8.3 tb=42C ta=84C
+[27b-q8-198k-a-w1-quote] wall=10.4s HIT seed=8844 fr=stop ans='TOPAZ-5521-RIVER'
+[27b-q8-198k-a-w2-exist] wall=3.0s ans='Yes'
+[27b-q8-198k-a-w3-sum] wall=8.7s ans='The document contains a series of number'
+[27b-q8-198k-a-tg128] wall=6.7s ctok=128 fr=length tb=66C ta=65C
+[27b-q8-198k-b-gtt] loaded_gtt=30171MB (post-load, pre-fill; best-effort sysfs)
