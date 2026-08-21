@@ -1,0 +1,28 @@
+# qwen38-27b-strix-halo
+
+> Qwen 3.8 27B serving on a $1,400 AMD Strix Halo mini-PC: the frozen
+> optimal config, measured speed sheet, needle-exact retrieval at the 262k
+> ceiling, vision fixed and validated upstream, and the Delegation Card.
+
+## What this is
+- The complete measured serving story for a local 27B model on consumer
+  hardware: config, speed, memory, quality, failure modes, fix trail.
+- Every number ships with its methodology and raw logs.
+- The machine that earned the Delegation Card (certified walk-away floors).
+
+## Key facts
+- $1,400 GMKtec EVO-X2 (AMD Strix Halo, 64GB unified, ROCm)
+- Qwen3.8-27B Q4_K_XL + q4_0 KV + mirror spec + 262,144 ctx
+- Needle-exact retrieval: 13/13 both seeds at the native ceiling
+- Vision: 6/6 real-UI screenshots; upstream fix validated on our silicon
+- Speed sheet with labeled regimes; time-per-task doctrine
+
+## Key pages
+- [README](README.md) - the closure table + speed sheet + all results
+- [Delegation Card](https://github.com/KyaniteLabs/delegation-bench) - the certified benchmark
+- [Blog: the complete story](https://kyanitelabs.tech/blog/qwen-27b-strix-halo-complete)
+- [Blog: the delegation card](https://kyanitelabs.tech/blog/the-delegation-card)
+
+## Contact
+- https://kyanitelabs.tech
+- https://x.com/KyaniteLabs_
