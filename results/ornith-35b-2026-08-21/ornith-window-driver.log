@@ -1,0 +1,65 @@
+[owin 00:44:34Z] entry gates: fmt COMPLETE + champion + :46399 free + fresh verdict + edge<88C
+[owin 00:44:34Z] entry gates clear (edge 37C, verdict=TEXT-ONLY, age 4498s)
+[owin 00:44:36Z] pmode balanced (readback OK); perf timer stopped+disabled (readback OK: disabled/inactive)
+[owin 00:44:36Z] cells dry-run OK (6 shapes, A/B pair hash present)
+[owin 00:44:40Z] champion stopped — window opens (t0)
+[owin 00:44:40Z] cell A: ctx=131072 kv=q4_0 spec=on — launching
+[owin 00:45:04Z] cell A: server healthy (PID 3120220, n_ctx_slot = 131072)
+PARSER-PROBE-PASS
+[A-tg128] wall=6.6s ctok=128 fr=length tb=46C ta=84C
+[A-cal1] wall=11.0s ctok=200 fr=length tb=82C ta=61C ans='# How Solar Panels Convert Sunlight into'
+[A-cal2] wall=11.6s ctok=200 fr=length tb=60C ta=64C ans='# Coastal Erosion: Causes and Effects\n\nC'
+[A-cal3] wall=11.2s ctok=200 fr=length tb=64C ta=65C ans='A refrigerator keeps food cold through a'
+[A-cal-mean] wall=11.3s n=3
+CELL-A DONE
+[owin 00:45:49Z] cell A: harness rc=0
+[owin 00:45:50Z] cell B: ctx=131072 kv=q4_0 spec=off — launching
+[owin 00:45:58Z] cell B: server healthy (PID 3124212, n_ctx_slot = 131072)
+PARSER-PROBE-PASS
+[B-tg128] wall=2.4s ctok=128 fr=length tb=48C ta=90C
+[B-cal1] wall=3.6s ctok=200 fr=length tb=90C ta=97C ans='# How Solar Panels Convert Sunlight into'
+[B-cal2] wall=3.6s ctok=200 fr=length tb=96C ta=84C ans='# Coastal Erosion: Causes and Effects\n\nC'
+[B-cal3] wall=3.6s ctok=200 fr=length tb=84C ta=69C ans='A refrigerator keeps food cold through a'
+[B-cal-mean] wall=3.6s n=3
+CELL-B DONE
+[owin 00:46:13Z] cell B: harness rc=0
+[owin 00:46:14Z] cell C: ctx=32768 kv=q4_0 spec=on — launching
+[owin 00:46:22Z] cell C: server healthy (PID 3125821, n_ctx_slot = 32768)
+[C-fill] wall=53s ptok=32483 target=32468 needle_tok=16808 (51% depth) fr=length tb=49C ta=71C
+cooldown: 71C > 55C, waiting 60s (0min/10max)
+[wd 00:48:22Z] WATCHDOG-KILL (95C instant t=96C)
+[owin 00:48:24Z] cell C: harness rc=137 (watchdog rc=1)
+[owin 00:48:54Z] cell D: ctx=32768 kv=q8_0 spec=on — launching
+[owin 00:49:02Z] cell D: server healthy (PID 3145994, n_ctx_slot = 32768)
+[D-fill] wall=53s ptok=32483 target=32468 needle_tok=16808 (51% depth) fr=length tb=61C ta=70C
+cooldown: 70C > 55C, waiting 60s (0min/10max)
+[D-decode] wall=12.0s ctok=200 tok_s=16.6 tb=41C ta=64C
+[D-w1-quote] wall=2.0s HIT fr=stop ans='GRANITE-4417-OMEGA'
+[D-w2-exist] wall=0.4s ans='Yes'
+[D-w3-sum] wall=3.2s ans='The document contains a series of number'
+CELL-D DONE
+[owin 00:51:17Z] cell D: harness rc=0
+[owin 00:51:18Z] cell E: ctx=131072 kv=q4_0 spec=off — launching
+[owin 00:51:26Z] cell E: server healthy (PID 3149364, n_ctx_slot = 131072)
+[E-fill] wall=359s ptok=130715 target=130772 needle_tok=69067 (52% depth) fr=length tb=47C ta=72C
+cooldown: 72C > 55C, waiting 60s (0min/10max)
+cooldown: 78C > 55C, waiting 60s (1min/10max)
+[E-decode] wall=15.4s ctok=200 tok_s=12.9 tb=57C ta=64C
+[E-w1-quote] wall=3.5s HIT fr=stop ans='GRANITE-4417-OMEGA'
+[E-w2-exist] wall=0.6s ans='Yes'
+[E-w3-sum] wall=4.0s ans='This document contains a series of numbe'
+CELL-E DONE
+[owin 00:59:57Z] cell E: harness rc=0
+[owin 00:59:58Z] cell F: ctx=131072 kv=q4_0 spec=on — launching
+[owin 01:00:06Z] cell F: server healthy (PID 3185791, n_ctx_slot = 131072)
+[F-fill] wall=388s ptok=130715 target=130772 needle_tok=69067 (52% depth) fr=length tb=53C ta=73C
+cooldown: 72C > 55C, waiting 60s (0min/10max)
+[F-decode] wall=18.0s ctok=200 tok_s=11.1 tb=42C ta=65C
+[F-w1-quote] wall=4.0s HIT fr=stop ans='GRANITE-4417-OMEGA'
+[F-w2-exist] wall=0.9s ans='Yes'
+[F-w3-sum] wall=5.3s ans='This document contains a series of numbe'
+CELL-F DONE
+[owin 01:08:06Z] cell F: harness rc=0
+[owin 01:08:37Z] champion restored: PID=3218677 kv_k=q4_0
+[owin 01:08:39Z] window restored (pmode performance readback OK, timer re-enabled)
+[owin 01:08:39Z] ORNITH-WINDOW COMPLETE rows=26
