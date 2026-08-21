@@ -1,0 +1,8 @@
+[dry] cell=A ctx=131072 cal_problems=3 pair_hash=14689dfc2c3e415d0da4705a6c39c857 tg128_prompt_defined=True
+[dry] cell=B ctx=131072 cal_problems=3 pair_hash=14689dfc2c3e415d0da4705a6c39c857 tg128_prompt_defined=True
+[dry] cell=C ctx=32768 fill_target=32468 paras=1015 chars~102762 needle_at_char=51315 (49% of chars) pw_present=True q1_in_req1=True
+[dry] cell=D ctx=32768 fill_target=32468 paras=1015 chars~102762 needle_at_char=51315 (49% of chars) pw_present=True q1_in_req1=True
+[dry] cell=E ctx=131072 fill_target=130772 paras=4087 chars~417521 needle_at_char=208162 (49% of chars) pw_present=True q1_in_req1=True
+[dry] cell=F ctx=131072 fill_target=130772 paras=4087 chars~417521 needle_at_char=208162 (49% of chars) pw_present=True q1_in_req1=True
+[dry] A/B pairing: byte-identical CAL list, pair_hash=14689dfc2c3e415d0da4705a6c39c857
+[dry] live token assert: pad/trim via /tokenize to +-1% before any fill

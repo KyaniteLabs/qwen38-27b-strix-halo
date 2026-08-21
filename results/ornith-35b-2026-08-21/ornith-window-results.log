@@ -1,0 +1,27 @@
+ornith-window 2026-08-21T00:45:04Z cells=A,B,C,D,E,F
+[A-tg128] wall=6.6s ctok=128 fr=length tb=46C ta=84C
+[A-cal1] wall=11.0s ctok=200 fr=length tb=82C ta=61C ans='# How Solar Panels Convert Sunlight into'
+[A-cal2] wall=11.6s ctok=200 fr=length tb=60C ta=64C ans='# Coastal Erosion: Causes and Effects\n\nC'
+[A-cal3] wall=11.2s ctok=200 fr=length tb=64C ta=65C ans='A refrigerator keeps food cold through a'
+[A-cal-mean] wall=11.3s n=3
+[B-tg128] wall=2.4s ctok=128 fr=length tb=48C ta=90C
+[B-cal1] wall=3.6s ctok=200 fr=length tb=90C ta=97C ans='# How Solar Panels Convert Sunlight into'
+[B-cal2] wall=3.6s ctok=200 fr=length tb=96C ta=84C ans='# Coastal Erosion: Causes and Effects\n\nC'
+[B-cal3] wall=3.6s ctok=200 fr=length tb=84C ta=69C ans='A refrigerator keeps food cold through a'
+[B-cal-mean] wall=3.6s n=3
+[C-fill] wall=53s ptok=32483 target=32468 needle_tok=16808 (51% depth) fr=length tb=49C ta=71C
+[D-fill] wall=53s ptok=32483 target=32468 needle_tok=16808 (51% depth) fr=length tb=61C ta=70C
+[D-decode] wall=12.0s ctok=200 tok_s=16.6 tb=41C ta=64C
+[D-w1-quote] wall=2.0s HIT fr=stop ans='GRANITE-4417-OMEGA'
+[D-w2-exist] wall=0.4s ans='Yes'
+[D-w3-sum] wall=3.2s ans='The document contains a series of number'
+[E-fill] wall=359s ptok=130715 target=130772 needle_tok=69067 (52% depth) fr=length tb=47C ta=72C
+[E-decode] wall=15.4s ctok=200 tok_s=12.9 tb=57C ta=64C
+[E-w1-quote] wall=3.5s HIT fr=stop ans='GRANITE-4417-OMEGA'
+[E-w2-exist] wall=0.6s ans='Yes'
+[E-w3-sum] wall=4.0s ans='This document contains a series of numbe'
+[F-fill] wall=388s ptok=130715 target=130772 needle_tok=69067 (52% depth) fr=length tb=53C ta=73C
+[F-decode] wall=18.0s ctok=200 tok_s=11.1 tb=42C ta=65C
+[F-w1-quote] wall=4.0s HIT fr=stop ans='GRANITE-4417-OMEGA'
+[F-w2-exist] wall=0.9s ans='Yes'
+[F-w3-sum] wall=5.3s ans='This document contains a series of numbe'
