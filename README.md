@@ -35,6 +35,20 @@ long-context rows on this page are quarantined as instrument-era artifacts.
 
 Final table + tonight's raw runs: `results/config-27b-2026-08-21/`.
 
+## SPEED SHEET — the four speeds of this rig (every number carries its regime)
+
+| regime | rate | what it is | measured |
+|---|---|---|---|
+| reading (prefill) | ~260-390 tok/s | ingesting your prompt | live traffic 08-21: 262 / 305; f16-era ladder 390 |
+| writing, short answers | ~20-26 tok/s | quick replies, math answers | GSM8K arms 22.1; warm probes 20.7-22.1 |
+| writing, long sustained answers | ~12-13 tok/s | 200-700 token generations, real prose | spec-sweep walls 15.1s/200tok; live integration traffic 11.9 t/s on ~700-token generations |
+| speed-trick bursts | 150-312 tok/s | ARTIFACT: speculative decode guessing repetitive text (counting); never real work | labeled artifact class since 08-16 |
+
+Product translation (time-per-task, the metric that matters): a 200-word
+answer lands in ~15 seconds; a long 700-word answer in ~60 seconds; prompts
+are read at hundreds of tokens per second. Cross-regime tok/s comparisons
+are meaningless - each number above is its own regime.
+
 ## UPDATE 2026-08-18 — KV cache advanced to 4-bit (q4_0); champion re-gated
 
 Same box, same model quant. Pre-registered promotion gate: paired arms,
