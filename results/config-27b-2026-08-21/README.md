@@ -37,10 +37,21 @@ raw). Champion cmdline captured pre-stop: spec-sweep-champion-cmdline.txt (box).
 2. Context: 262144, retrieval proven at the native ceiling — LOCKED
 3. Think routing: three-band knee maps — LOCKED
 4. Spec: mirror config optimal (15.1 vs 17.8s) — PINNED
-5. KV: q8_0 recommended (parity + faster, +2.0 GB) — CEO sign-off pending
+5. KV: q4_0 RETAINED BY CEO RULING (2026-08-21 ~04:20Z PT: "keep the cheap one") — FINAL
+
+## CLOSE-OUT (2026-08-21 ~04:30Z PT)
+The CEO weighed the trade (8 GB memory at full window vs 1-3s on warm
+follow-ups; two-at-once servicing undecided) and kept the light setting.
+The confirmation window was cut at the ruling (clean trap-restore; champion
+never down for long): seed-A needle on q8 at 198k HIT exact before the cut
+(10.4s, fr=stop, seed recorded), q4-arm GSM8K n=60 strict-match = 0.70
+(thinking-off, 5-shot — NOT comparable to the 0.980 official canon, which ran
+different eval settings; labeled). Seed B + q8 math arm unrun (moot).
+**FINAL 27B CONFIG (serving now, zero changes needed): Q4_K_XL weights +
+q4_0 KV + mirror spec config + 262144 ctx + think-off-default routing.**
 
 ## Raw
-kv-sweep-results.log / kv-sweep-driver.log (operator-cut + verdict labeled),
+flip-confirm-results.log / flip-confirm-driver.log (cut window, partial gate labeled), kv-sweep-results.log / kv-sweep-driver.log (operator-cut + verdict labeled),
 spec-sweep-results.log / spec-sweep-driver.log, per-launch server logs.
 Instruments: qwen27-nucbox-stack components/exp-2026-08-19/ kv-sweep.sh,
 kv-cells.py, spec-sweep.sh, spec-cells.py + self-tests (41/41, 32/32) after one

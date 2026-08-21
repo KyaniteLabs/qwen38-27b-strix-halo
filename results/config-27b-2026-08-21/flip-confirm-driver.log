@@ -1,0 +1,33 @@
+[flip 03:22:46Z] entry gates: champion + :46399 free + no benches/drivers + edge<88C
+[flip 03:22:46Z] entry gates clear (edge 35C)
+[flip 03:22:46Z] cells dry-run OK (11 shapes)
+[flip 03:23:12Z] lm_eval smoke: exact_match_strict=PARSE-FAIL (n=2; parse-path validation)
+[flip 03:23:12Z] ABORT: lm_eval smoke produced no parseable exact_match — fix parse before burning the window
+[flip 03:23:12Z] trap fired — restoring
+[flip 03:24:41Z] entry gates: champion + :46399 free + no benches/drivers + edge<88C
+[flip 03:24:41Z] entry gates clear (edge 36C)
+[flip 03:24:41Z] cells dry-run OK (11 shapes)
+[flip 03:24:54Z] lm_eval smoke: exact_match_strict=1.0 (n=2; results-file parse path validated)
+[flip 03:24:54Z] gsm8k q4_0 arm vs live champion (60 questions)
+[flip 03:33:54Z] gsm8k q4_0 exact_match_strict=0.7
+[flip 03:33:56Z] pmode balanced (readback OK); perf timer stopped+disabled (disabled/inactive)
+[flip 03:33:59Z] champion stopped — q8 candidate launches (t0)
+[flip 03:34:16Z] q8 candidate healthy (PID 3693597, n_ctx_slot = 262144)
+start-gate: 64C > 60C, waiting 60s (0min/60max)
+[27b-q8-198k-a-gtt] loaded_gtt=29937MB (post-load, pre-fill; best-effort sysfs)
+[27b-q8-198k-a-fill] wall=1972s ptok=198164 target=198235 seed=8844 needle_tok=105257 (53% depth) fr=length tb=53C ta=73C gtt_after=30157MB
+cooldown: 73C > 55C, waiting 60s (0min/10max)
+[27b-q8-198k-a-decode] wall=2.1s ctok=17 tok_s=8.3 tb=42C ta=84C
+[27b-q8-198k-a-w1-quote] wall=10.4s HIT seed=8844 fr=stop ans='TOPAZ-5521-RIVER'
+[27b-q8-198k-a-w2-exist] wall=3.0s ans='Yes'
+[27b-q8-198k-a-w3-sum] wall=8.7s ans='The document contains a series of number'
+[27b-q8-198k-a-tg128] wall=6.7s ctok=128 fr=length tb=66C ta=65C
+CELL-27b-q8-198k-a DONE
+[flip 04:09:46Z] cell 27b-q8-198k-a rc=0
+[27b-q8-198k-b-gtt] loaded_gtt=30171MB (post-load, pre-fill; best-effort sysfs)
+[flip 04:25:45Z] trap fired — restoring
+[flip 04:25:47Z] window restored (pmode performance readback OK, timer re-enabled)
+[flip 04:26:19Z] champion restored: PID=3862913 kv_k=q4_0
+[flip 04:26:19Z] trap fired — restoring
+[flip 04:26:20Z] window restored (pmode performance readback OK, timer re-enabled)
+[flip 04:26:20Z] champion restored: PID=3862913 kv_k=q4_0
