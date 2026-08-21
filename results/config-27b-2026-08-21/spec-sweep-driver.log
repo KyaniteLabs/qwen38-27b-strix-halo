@@ -1,0 +1,62 @@
+[spec 02:55:32Z] entry gates: KV-SWEEP COMPLETE + champion + :46399 free + no benches + edge<88C
+[spec 02:55:32Z] entry gates clear (edge 42C)
+[spec 02:55:32Z] dry-run OK (4 states, shared prompt hash)
+[spec 02:55:34Z] pmode balanced (readback OK); perf timer stopped+disabled (disabled/inactive)
+[spec 02:55:37Z] champion stopped — spec sweep opens (t0)
+[spec 02:55:37Z] state mirror: launching (spec: mirror)
+[spec 02:55:53Z] state mirror: server healthy (PID 3570192)
+PARSER-PROBE-PASS
+[mirror-tg128] wall=6.6s ctok=128 fr=length
+[mirror-cal1] wall=13.8s ctok=200 fr=length ans='Solar panels convert sunlight '
+[mirror-cal2] wall=16.0s ctok=200 fr=length ans='Coastal erosion is a dynamic g'
+[mirror-cal3] wall=15.6s ctok=200 fr=length ans='A refrigerator maintains a coo'
+[mirror-cal-mean] wall=15.1s n=3
+[mirror-count1] wall=2.0s ctok=81 fr=stop  # diagnostic-class
+[mirror-count2] wall=1.4s ctok=81 fr=stop  # diagnostic-class
+[mirror-count3] wall=1.3s ctok=81 fr=stop  # diagnostic-class
+STATE-mirror DONE
+[spec 02:56:53Z] state mirror: harness rc=0
+[spec 02:56:54Z] state off: launching (spec: off)
+[spec 02:57:02Z] state off: server healthy (PID 3572039)
+PARSER-PROBE-PASS
+[off-tg128] wall=11.4s ctok=128 fr=length
+[off-cal1] wall=17.7s ctok=200 fr=length ans='Solar panels convert sunlight '
+[off-cal2] wall=17.9s ctok=200 fr=length ans='Coastal erosion is a dynamic g'
+[off-cal3] wall=17.7s ctok=200 fr=length ans='A refrigerator maintains a col'
+[off-cal-mean] wall=17.8s n=3
+[off-count1] wall=7.4s ctok=81 fr=stop  # diagnostic-class
+[off-count2] wall=7.2s ctok=81 fr=stop  # diagnostic-class
+[off-count3] wall=7.2s ctok=81 fr=stop  # diagnostic-class
+STATE-off DONE
+[spec 02:58:32Z] state off: harness rc=0
+[spec 02:58:33Z] state ngram: launching (spec: ngram)
+[spec 02:58:41Z] state ngram: server healthy (PID 3576805)
+PARSER-PROBE-PASS
+[ngram-tg128] wall=11.3s ctok=128 fr=length
+[ngram-cal1] wall=17.7s ctok=200 fr=length ans='Solar panels convert sunlight '
+[ngram-cal2] wall=17.7s ctok=200 fr=length ans='Coastal erosion is a dynamic g'
+[ngram-cal3] wall=17.7s ctok=200 fr=length ans='A refrigerator maintains a col'
+[ngram-cal-mean] wall=17.7s n=3
+[ngram-count1] wall=7.3s ctok=81 fr=stop  # diagnostic-class
+[ngram-count2] wall=2.2s ctok=81 fr=stop  # diagnostic-class
+[ngram-count3] wall=2.2s ctok=81 fr=stop  # diagnostic-class
+STATE-ngram DONE
+[spec 03:00:11Z] state ngram: harness rc=0
+[spec 03:00:12Z] state mtp: launching (spec: mtp)
+[spec 03:00:20Z] state mtp: server healthy (PID 3579983)
+PARSER-PROBE-PASS
+[mtp-tg128] wall=6.6s ctok=128 fr=length
+[mtp-cal1] wall=13.7s ctok=200 fr=length ans='Solar panels convert sunlight '
+[mtp-cal2] wall=15.9s ctok=200 fr=length ans='Coastal erosion is a dynamic g'
+[mtp-cal3] wall=15.7s ctok=200 fr=length ans='A refrigerator maintains a coo'
+[mtp-cal-mean] wall=15.1s n=3
+[mtp-count1] wall=2.0s ctok=81 fr=stop  # diagnostic-class
+[mtp-count2] wall=2.0s ctok=81 fr=stop  # diagnostic-class
+[mtp-count3] wall=1.7s ctok=81 fr=stop  # diagnostic-class
+STATE-mtp DONE
+[spec 03:01:20Z] state mtp: harness rc=0
+[spec 03:01:31Z] champion restored: PID=3587049 kv_k=q4_0
+[spec 03:01:33Z] window restored (pmode performance readback OK, timer re-enabled)
+[spec 03:01:33Z] WALLS: mirror=15.1s off=17.8s ngram=17.7s mtp=15.1s
+[spec 03:01:33Z] SPEC VERDICT: MIRROR HOLDS (champion spec config optimal; dial PINNED; 27B table complete pending KV)
+[spec 03:01:33Z] SPEC-SWEEP COMPLETE rows=32
