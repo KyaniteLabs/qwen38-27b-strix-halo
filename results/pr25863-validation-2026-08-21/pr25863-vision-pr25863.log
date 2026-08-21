@@ -1,0 +1,9 @@
+[pr25863] R1 (bar-chart.png): HIT 3.8s fr=stop think=0ch ans='Beta'
+[pr25863] R2 (table.png): HIT 4.0s fr=stop think=0ch ans='312'
+[pr25863] R3 (form.png): HIT 4.6s fr=stop think=0ch ans='simon@kyanitelabs.tech'
+[pr25863] R4 (terminal.png): HIT 4.1s fr=stop think=0ch ans='503'
+[pr25863] R5 (progress.png): HIT 4.2s fr=stop think=0ch ans='music-library'
+[pr25863] R6 (line-chart.png): HIT 3.9s fr=stop think=0ch ans='up'
+VISION-REAL: 6/6 correct
+VISION-REAL DONE
+ROWS=6

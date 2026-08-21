@@ -1,0 +1,4 @@
+[deep-pr25863] target=10000 ptok=10013 HIT fr=stop attractor=N wall=35s ans='OBSIDIAN-6612-KILO'
+[deep-pr25863] target=12000 ptok=12018 HIT fr=stop attractor=N wall=42s ans='AMETHYST-2049-LIMA'
+[deep-pr25863] target=16000 ptok=16015 HIT fr=stop attractor=N wall=58s ans='PLATINUM-8830-NOVA'
+DEEP-pr25863 DONE ROWS=3 hits=3
