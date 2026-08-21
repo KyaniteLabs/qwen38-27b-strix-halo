@@ -1,0 +1,34 @@
+spec-sweep 2026-08-21T02:55:53Z states=mirror,off,ngram,mtp
+[mirror-tg128] wall=6.6s ctok=128 fr=length
+[mirror-cal1] wall=13.8s ctok=200 fr=length ans='Solar panels convert sunlight '
+[mirror-cal2] wall=16.0s ctok=200 fr=length ans='Coastal erosion is a dynamic g'
+[mirror-cal3] wall=15.6s ctok=200 fr=length ans='A refrigerator maintains a coo'
+[mirror-cal-mean] wall=15.1s n=3
+[mirror-count1] wall=2.0s ctok=81 fr=stop  # diagnostic-class
+[mirror-count2] wall=1.4s ctok=81 fr=stop  # diagnostic-class
+[mirror-count3] wall=1.3s ctok=81 fr=stop  # diagnostic-class
+[off-tg128] wall=11.4s ctok=128 fr=length
+[off-cal1] wall=17.7s ctok=200 fr=length ans='Solar panels convert sunlight '
+[off-cal2] wall=17.9s ctok=200 fr=length ans='Coastal erosion is a dynamic g'
+[off-cal3] wall=17.7s ctok=200 fr=length ans='A refrigerator maintains a col'
+[off-cal-mean] wall=17.8s n=3
+[off-count1] wall=7.4s ctok=81 fr=stop  # diagnostic-class
+[off-count2] wall=7.2s ctok=81 fr=stop  # diagnostic-class
+[off-count3] wall=7.2s ctok=81 fr=stop  # diagnostic-class
+[ngram-tg128] wall=11.3s ctok=128 fr=length
+[ngram-cal1] wall=17.7s ctok=200 fr=length ans='Solar panels convert sunlight '
+[ngram-cal2] wall=17.7s ctok=200 fr=length ans='Coastal erosion is a dynamic g'
+[ngram-cal3] wall=17.7s ctok=200 fr=length ans='A refrigerator maintains a col'
+[ngram-cal-mean] wall=17.7s n=3
+[ngram-count1] wall=7.3s ctok=81 fr=stop  # diagnostic-class
+[ngram-count2] wall=2.2s ctok=81 fr=stop  # diagnostic-class
+[ngram-count3] wall=2.2s ctok=81 fr=stop  # diagnostic-class
+[mtp-tg128] wall=6.6s ctok=128 fr=length
+[mtp-cal1] wall=13.7s ctok=200 fr=length ans='Solar panels convert sunlight '
+[mtp-cal2] wall=15.9s ctok=200 fr=length ans='Coastal erosion is a dynamic g'
+[mtp-cal3] wall=15.7s ctok=200 fr=length ans='A refrigerator maintains a coo'
+[mtp-cal-mean] wall=15.1s n=3
+[mtp-count1] wall=2.0s ctok=81 fr=stop  # diagnostic-class
+[mtp-count2] wall=2.0s ctok=81 fr=stop  # diagnostic-class
+[mtp-count3] wall=1.7s ctok=81 fr=stop  # diagnostic-class
+SPEC-SWEEP COMPLETE rows=32

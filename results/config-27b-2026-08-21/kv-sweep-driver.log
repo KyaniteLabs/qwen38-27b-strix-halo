@@ -1,0 +1,37 @@
+[kvs 02:09:00Z] entry gates: champion + :46399 free + no benches + edge<88C
+[kvs 02:09:00Z] entry gates clear (edge 35C)
+[kvs 02:09:00Z] cells dry-run OK (9 shapes defined; 8 run this window per plan)
+[kvs 02:09:02Z] pmode balanced (readback OK); perf timer stopped+disabled (disabled/inactive)
+[kvs 02:09:05Z] champion stopped — sweep opens (t0)
+[kvs 02:09:05Z] cell 27b-q8-131k: ctx=131072 kv=q8_0 model=Qwen3.8-27B-UD-Q4_K_XL.gguf — launching
+[kvs 02:09:13Z] cell 27b-q8-131k: server healthy (PID 3413430, n_ctx_slot = 131072)
+[27b-q8-131k-gtt] loaded_gtt=21526MB (post-load, pre-fill; best-effort sysfs)
+[27b-q8-131k-fill] wall=930s ptok=130719 target=130772 needle_tok=69061 (52% depth) fr=length tb=45C ta=72C gtt_after=21592MB
+cooldown: 72C > 55C, waiting 60s (0min/10max)
+[27b-q8-131k-decode] wall=3.2s ctok=17 tok_s=5.3 tb=44C ta=93C
+[27b-q8-131k-w1-quote] wall=8.0s HIT fr=stop ans='TOPAZ-5521-RIVER'
+[27b-q8-131k-w2-exist] wall=1.3s ans='Yes'
+[27b-q8-131k-w3-sum] wall=9.1s ans='The document contains a series of number'
+[27b-q8-131k-tg128] wall=12.3s ctok=128 fr=length tb=66C ta=65C
+CELL-27b-q8-131k DONE
+[kvs 02:26:29Z] cell 27b-q8-131k: harness rc=0
+[kvs 02:27:00Z] cell 27b-q4-131k: ctx=131072 kv=q4_0 model=Qwen3.8-27B-UD-Q4_K_XL.gguf — launching
+[kvs 02:27:08Z] cell 27b-q4-131k: server healthy (PID 3482570, n_ctx_slot = 131072)
+[27b-q4-131k-gtt] loaded_gtt=19523MB (post-load, pre-fill; best-effort sysfs)
+[27b-q4-131k-fill] wall=915s ptok=130719 target=130772 needle_tok=69061 (52% depth) fr=length tb=60C ta=72C gtt_after=19589MB
+cooldown: 71C > 55C, waiting 60s (0min/10max)
+[27b-q4-131k-decode] wall=4.0s ctok=17 tok_s=4.2 tb=41C ta=95C
+[27b-q4-131k-w1-quote] wall=8.4s HIT fr=stop ans='TOPAZ-5521-RIVER'
+[27b-q4-131k-w2-exist] wall=1.5s ans='Yes'
+[27b-q4-131k-w3-sum] wall=11.9s ans='The document contains a series of number'
+[27b-q4-131k-tg128] wall=11.9s ctok=128 fr=length tb=65C ta=66C
+CELL-27b-q4-131k DONE
+[kvs 02:44:08Z] cell 27b-q4-131k: harness rc=0
+[kvs 02:44:09Z] cell 35b-q8-131k: ctx=131072 kv=q8_0 model=Ornith-1.5-35B-Q4_K_M.gguf — launching
+[kvs 02:44:33Z] cell 35b-q8-131k: server healthy (PID 3528482, n_ctx_slot = 131072)
+[35b-q8-131k-gtt] loaded_gtt=21939MB (post-load, pre-fill; best-effort sysfs)
+[35b-q8-131k-fill] wall=373s ptok=130719 target=130772 needle_tok=69061 (52% depth) fr=length tb=45C ta=72C gtt_after=22027MB
+cooldown: 72C > 55C, waiting 60s (0min/10max)
+[kvs 02:52:30Z] OPERATOR CUT (CEO directive: 27B gates all Ornith work): driver SIGKILLed mid 35b-q8-131k (kill-verified 3412750; SIGKILL bypassed trap -> manual restores: bench 3528859 + server 3528482 kill-verified, champion start q4_0 readback OK, pmode performance + timer restored). 27B decision cells COMPLETE (both 131k quants full rows). 32k redundancy + f16 spot + 35B cells UNFIRED by cut.
+[kvs 02:52:30Z] OPERATOR VERDICT (pre-registered rule, computed from completed rows): q8_0 needle HIT, q4_0 needle HIT (parity); decode walls 3.2s vs 4.0s (q8 within band AND faster); warm queries all favor q8 (8.0/1.3/9.1 vs 8.4/1.5/11.9); GTT cost +2.0GB at 131k (21.6 vs 19.6 of 64). -> 27B RECOMMEND: q8_0 (quality parity, walls favor q8, CEO lean)
+KV-SWEEP COMPLETE rows=24 (operator-cut; 27B decision grade)
