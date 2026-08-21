@@ -79,3 +79,37 @@ both seeds, at the native ceiling — 13/13 cells post-revert, zero attractor ou
 The published "n=1" qualifier on the inversion claim is now superseded by cross-seed
 replication. Pre-revert comparison: the same instrument measured 1/6-completed with
 degenerate attractors on s4419 and never completed s8807 at all.
+
+## UPDATE 2026-08-21 00:52Z — FORMAT SWEEP COMPLETE: S-027 CLOSED (3/3 arms)
+v2 overnight run (arms code+semantic; per-arm thermal gates, artifact-immune
+watchdog, partial-append results). Arm 1 (prose) backfilled from the v1 driver
+log with provenance: it completed 08-20 21:59Z before the v1 watchdog kill.
+
+| arm | needle form in haystack | strict score | answer | wall |
+|---|---|---|---|---|
+| prose | `Station LIMA access code: COBALT-8835-DELTA.` | HIT | `COBALT-8835-DELTA` (exact) | 1977s |
+| code | python assignment in a fenced block | HIT | `COBALT-8835-DELTA` (exact) | 2000s |
+| semantic | the code described in words (exact string absent by construction) | MISS | `cobalt 8835 delta` | 2000s |
+
+All at 198k tokens, depth 50%, seed 4419, temp 0, finish_reason=stop, zero
+attractor outputs. prompt_tokens 198228/198235/198240 (format shifts total by
+12 tokens; haystack generator byte-identical).
+
+**Verdict (pilot, n=1 per arm):**
+1. Exact-string retrieval at 198k survives BOTH literal formats (prose, code
+   block) — consistent with the 13/13 post-revert canon.
+2. The semantic arm cannot HIT by construction (the exact hyphenated string is
+   not in the prompt). The information content DID survive: the model returned
+   all three components in order, normalized to lowercase words (`cobalt 8835
+   delta`). Read as: content retained, format not inventable. The strict MISS
+   is an instrument property, not a retrieval failure.
+3. Pre-registered hypothesis ("B and C both MISS; format does not rescue
+   arbitrary IDs") is REFUTED for code (HIT); for semantic it is untestable by
+   exact-match — the content-level result is positive.
+
+Thermal note: tb/ta values in the v2 rows are Tctl (control temp); the 08-20
++25C prefill-spike finding and the v2 gates live in RUNBOOK §12 amendment.
+The pre-registered 60C start-gates held (both arms started at 43-45C Tctl).
+
+Raw: `needle-format-v2-results.log`, `fmt-overnight-v2-driver.log`,
+arm-1 backfill source `~/exp/fmt-overnight-driver.log` line 8 (box).

@@ -1,0 +1,5 @@
+needle-format v2 2026-08-20T23:31:58Z arms=code,semantic
+[fmt-code] d50: HIT fr=stop wall=2000s ptok=198235 tb=45C ta=74C ans='COBALT-8835-DELTA'
+[fmt-semantic] d50: MISS fr=stop wall=2000s ptok=198240 tb=43C ta=73C ans='cobalt 8835 delta'
+NEEDLE-FORMAT DONE
+ROWS=2

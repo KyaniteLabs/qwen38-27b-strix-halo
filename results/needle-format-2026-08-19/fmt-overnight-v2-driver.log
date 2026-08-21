@@ -1,0 +1,16 @@
+[fmt2 23:31:56Z] waiting for fresh probe verdict + probe exit (4h bound)
+[fmt2 23:31:56Z] gate passed: fresh verdict=TEXT-ONLY
+[fmt2 23:31:58Z] pmode balanced (readback OK); perf timer stopped+disabled
+[fmt2 23:31:58Z] dry-run OK: 2 arms (code literal, semantic), placement verified
+[fmt2 23:31:58Z] start gate OK (edge 35C) — firing arms 2+3
+[fmt2 23:31:58Z] bench fired PID 2882439; watchdog arming (95-instant / 92x2 / fail-closed)
+PARSER-PROBE-PASS
+[fmt-code] d50: HIT fr=stop wall=2000s ptok=198235 tb=45C ta=74C ans='COBALT-8835-DELTA'
+cooldown: 74C > 55C, waiting 60s (0min/10max)
+[fmt-semantic] d50: MISS fr=stop wall=2000s ptok=198240 tb=43C ta=73C ans='cobalt 8835 delta'
+cooldown: 73C > 55C, waiting 60s (0min/10max)
+ROWS=2
+[fmt2 00:40:44Z] bench exited rc=0
+[fmt2 00:40:44Z] RESULTS COMPLETE: [fmt-code] d50: HIT fr=stop wall=2000s ptok=198235 tb=45C ta=74C ans='COBALT-8835-DELTA' [fmt-semantic] d50: MISS fr=stop wall=2000s ptok=198240 tb=43C ta=73C ans='cobalt 8835 delta' 
+[fmt2 00:40:46Z] window restored (pmode performance readback OK, timer re-enabled)
+[fmt2 00:40:46Z] FMT-OVERNIGHT COMPLETE
