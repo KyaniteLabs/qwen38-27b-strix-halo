@@ -66,12 +66,13 @@ A 35B-class MoE on this $1,400 rig retrieves exact arbitrary codes from a
   probe loaded model+mmproj+drafter at n_ctx_slot=131072, and all four 131072
   window loads succeeded (kv-evidence file).
 
-## CEO-ruling note (disclosed)
-The CEO's standing ruling tonight: nothing larger than Q4. Cell D measured the
-q8_0 KV cache setting in a stopped-champion measurement cell per the
-pre-approved launch list (A-F). No serving config used anything above Q4.
-If the ruling was meant to cover measurement cells too, this cell's rows should
-be struck on his word — flagged to him in the session report.
+## CEO-ruling note (RESOLVED 2026-08-21 ~01:45Z)
+The CEO's "nothing larger than Q4" ruling (08-20 ~23:55Z) was about MODEL WEIGHTS
+quantization, not KV-cache quant — clarified by him on 08-21: KV choice is the
+lab's call, lean q8_0, "find the optimal". Cell D (q8_0 KV, measurement cell in a
+stopped-champion window) therefore stands as-is; no rows struck. A dedicated
+KV-quant optimality sweep (q4_0/q8_0/f16, quality + walls + GTT) follows this
+window. No serving config used anything above Q4 weights at any point.
 
 ## Raw
 - `ornith-window-results.log` — all 26 rows
