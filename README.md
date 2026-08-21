@@ -10,6 +10,31 @@ on **AMD Strix Halo** (Ryzen AI Max+ 395, Radeon 8060S, unified LPDDR5X, GTT 64G
 Current champion (production, 2026-08-18 gate v2): **UD-Q4_K_XL @ 262,144 ctx, K+V q4_0 KV**.
 (96k / f16 and 262k / q8_0 are prior rungs — tables below.)
 
+## ARC CLOSED 2026-08-21 — the complete, measured configuration (final)
+
+Every dial on this rig is now pinned by a pre-registered measurement, and the
+Qwen3.8-27B-on-Strix-Halo arc is complete:
+
+| dial | final value | evidence |
+|---|---|---|
+| weights | UD-Q4_K_XL | quant ladder; paired gates |
+| KV cache | q4_0 (K+V) | 08-18 gate + 08-21 paired trade vs q8_0 (quality parity; q8 faster on warm queries by 1-3s but costs 8GB at full window — we kept the light one) |
+| context | 262,144 | retrieval proven AT the native ceiling (261,130/262,144 tok) |
+| speculation | draft-mtp + ngram-mod, n-max 12 | 08-21 4-way paired walls: 15.1s/200-tok vs 17.8s off / 17.7 ngram-only / 15.1 mtp-only |
+| thinking | off by default; hard-lane thinks | 3-band knee maps, full-sample |
+| needle retrieval | exact, all depths, both seeds, ceiling | 13/13 post-fix + format sweep (prose/code exact; words-only retains content) |
+| vision | fixed + upstream-validated | 6/6 real-UI screenshots; PR #25863 validated 9/9 paired on gfx1151 (#26209) |
+
+**Correction the close-out owes the record:** the 08-18 section below describes
+"degenerate-basin outputs" (0/2 needles) — that was the llama.cpp c7d8722
+host-buffer bug on integrated GPUs, not model behavior. Post-fix, the same
+instrument retrieves 13/13 exact (both seeds, all depths, at the ceiling).
+The bug was bisected, reported upstream (#26209), our fix validated, and the
+upstream fix candidate independently validated on this silicon. Pre-revert
+long-context rows on this page are quarantined as instrument-era artifacts.
+
+Final table + tonight's raw runs: `results/config-27b-2026-08-21/`.
+
 ## UPDATE 2026-08-18 — KV cache advanced to 4-bit (q4_0); champion re-gated
 
 Same box, same model quant. Pre-registered promotion gate: paired arms,
