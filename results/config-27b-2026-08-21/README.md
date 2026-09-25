@@ -53,6 +53,6 @@ q4_0 KV + mirror spec config + 262144 ctx + think-off-default routing.**
 ## Raw
 flip-confirm-results.log / flip-confirm-driver.log (cut window, partial gate labeled), kv-sweep-results.log / kv-sweep-driver.log (operator-cut + verdict labeled),
 spec-sweep-results.log / spec-sweep-driver.log, per-launch server logs.
-Instruments: qwen27-nucbox-stack components/exp-2026-08-19/ kv-sweep.sh,
+Instruments: qwen27-gpu-host-stack components/exp-2026-08-19/ kv-sweep.sh,
 kv-cells.py, spec-sweep.sh, spec-cells.py + self-tests (41/41, 32/32) after one
 critic round each.

@@ -1,6 +1,6 @@
 import json, time, urllib.request, sys
 
-# Reconstructed 2026-08-15 from ~/workspaces/qwen27-nucbox-stack/quality-q4.json
+# Reconstructed 2026-08-15 from ~/workspaces/qwen27-gpu-host-stack/quality-q4.json
 # (original /tmp/qwen-quality.py lost in NUC reboot 04:18Z).
 # 6-prompt fixed suite, thinking FORCED ON via chat_template_kwargs so it is
 # valid against both default-off and default-on servers.
