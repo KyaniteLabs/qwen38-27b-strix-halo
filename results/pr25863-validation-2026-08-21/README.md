@@ -36,5 +36,5 @@ inputs; n=6 vision (pilot) + n=3 deep per arm; token counts server-verified.
 - pr25863-vision-{pr25863,dflash}.log — 6/6 both arms
 - pr25863-deep-{pr25863,dflash}.log — 3/3 both arms
 - pr25863-server-{pr25863,dflash}.log — per-launch server logs
-- Instruments: qwen27-nucbox-stack components/exp-2026-08-19/pr25863-battery.sh,
+- Instruments: qwen27-gpu-host-stack components/exp-2026-08-19/pr25863-battery.sh,
   deep-control.py, test-pr25863-battery.sh (28/28)

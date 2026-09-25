@@ -61,7 +61,7 @@ the three labeled conditions above.
   verdicts independently re-executed from the saved generations — 15/15 agree;
   (P3) sampling uncertainty made explicit: **20/30 = 67%, Wilson 95% CI
   [49%, 81%] — n=30, read the CI, not the point estimate.**
-- Grading environment: python3 on the nucbox (3.12); the shipped
+- Grading environment: python3 on the gpu-host (3.12); the shipped
   `lcb-bench.py` is the exact canonical grader (byte-verified against the box
   copy after a stale-version mixup was caught and fixed during the gate).
 - Arm A/B generations were not saved (fixed for later arms); arm A was

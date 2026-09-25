@@ -79,5 +79,5 @@ window. No serving config used anything above Q4 weights at any point.
 - `ornith-window-driver.log` — full driver log incl. gates, kills, restores
 - `ornith-window-server-[A-F].log` — per-launch server logs (restart evidence)
 - `ornith-window-kv-evidence.log`, `ornith-window-metrics.log`, `ornith-window-dryrun.log`
-- Instruments: qwen27-nucbox-stack components/exp-2026-08-19/ornith-window*.sh,
+- Instruments: qwen27-gpu-host-stack components/exp-2026-08-19/ornith-window*.sh,
   ornith-cells.py, test-ornith-window.sh (65/65 self-test; critic round applied)
