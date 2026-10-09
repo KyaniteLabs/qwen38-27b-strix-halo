@@ -346,4 +346,4 @@ Spec decoding is worth **5× on repetition-heavy tasks**. The ngram cap costs no
 `--spec-ngram-mod-n-max 12` now rides the champion. MTP + ngram together beat either alone.
 
 Agentic bench (HumanEval 30-problem, paired, dry-run verified 30/30 canonical solutions):
-harness ready in [agentic-bench/](https://github.com/KyaniteLabs/qwen38-27b-strix-halo/blob/main/agentic-bench/).
+harness ready locally; the `agentic-bench/` harness is not yet published in this repository.
