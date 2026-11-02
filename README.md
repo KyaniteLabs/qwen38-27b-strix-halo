@@ -33,7 +33,7 @@ Qwen3.8-27B-on-Strix-Halo arc is complete:
 "degenerate-basin outputs" (0/2 needles) — that was the llama.cpp c7d8722
 host-buffer bug on integrated GPUs, not model behavior. Post-fix, the same
 instrument retrieves 13/13 exact (both seeds, all depths, at the ceiling).
-The bug was bisected, reported upstream (#26209), our fix validated, and the
+The bug was bisected, independently reproduced on the existing upstream issue (#26209, opened by another user), our fix validated, and the
 upstream fix candidate independently validated on this silicon. Pre-revert
 long-context rows on this page are quarantined as instrument-era artifacts.
 
