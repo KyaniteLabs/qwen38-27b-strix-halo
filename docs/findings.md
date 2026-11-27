@@ -32,7 +32,7 @@ completion tokens) showed thinking verbosity, not decode speed, decides task lat
 
 ## Flag map: dead ends measured once, don't re-run (2026-08-15)
 - `--spec-draft-n-max 16`: code regresses to 21.3 tok/s (deep-draft waste returns). n12 is the peak.
-- `--spec-ngram-mod-n-min 12`: identical to 24 (warm 146.6/158.0 vs 148.0/157.6, mean-len 37.67 both) — 24 is the plateau.
+- `--spec-ngram-mod-n-min 12`: identical to 24 (warm 146.6/158.0 vs 148.0/157.6, all stream events/s, mean-len 37.67 both) — 24 is the plateau.
 - `--spec-draft-p-split 0`: zero effect (94.3/99.4 vs 94.7/98.5).
 - `-t 12` vs `-t 16`: identical — CPU threads are not the bottleneck at full GPU offload.
 - `-ub 2048`: prefill WORSE (45.2-46.3s vs 40.6-41.4s on a 16k prompt); `-ub 1024` identical to default.
