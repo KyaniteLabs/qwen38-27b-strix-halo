@@ -78,10 +78,10 @@ Rollback unit preserved.
 Same hardware, same quant, three more gates passed in one night (ladder
 96k → 160k → 192k → 262k, each A/B-tested on the real-task battery):
 
-| Config | cold c30 | warm c30 | tpt battery | context |
+| Config | cold c30 (stream events/s) | warm c30 (stream events/s) | tpt battery | context |
 |---|---|---|---|---|
 | champion 08-16 → superseded 08-18: Q4_K_XL + K+V q8_0 KV cache | ~52-57 | **150-158 (band held)** | 6.8-12.9 s/task, 5/5 | **262,144 (native max)** |
-| prior champion (row above) | 59.7 | 148-163 | 7.6-7.7 | 96k (f16 KV) |
+| prior champion (row above) | 59.7 (stream events/s) | 148-163 (stream events/s) | 7.6-7.7 | 96k (f16 KV) |
 
 The whole gain comes from KV-cache quantization (K+V q8_0 — KV halves, so
 262k of q8 KV fits in LESS memory than 96k of f16). One labeled cost:
@@ -99,16 +99,22 @@ is the most useful result in this repo.
 
 ## The numbers (measured 2026-08-15, single box, reproducible via `components/bench/`)
 
-count-to-30 bench, cold = first exposure, warm = back-to-back repeats:
+count-to-30 bench, cold = first exposure, warm = back-to-back repeats. **Every c30
+figure in this README is a stream-event rate, not a measured token rate**:
+[`components/bench/qwen27-bench.py`](components/bench/qwen27-bench.py) counts streamed
+content chunks (`n += 1` per `delta.content`) and divides by elapsed seconds. Its own
+comment asserts `1 content chunk == 1 token`; that equality was never measured on this
+server, so the `tok/s` it prints is a chunk rate. The magnitude is not shown to be wrong
+— only the unit is unproven.
 
-| Config | Cold tok/s | Warm/repeat tok/s | Context |
+| Config | Cold c30 (stream events/s) | Warm/repeat c30 (stream events/s) | Context |
 |---|---|---|---|
 | MTP n=2 (day-0 default) | 22 | 25 | 16k |
 | MTP n=6 (mission baseline) | 32.7 | — | 32k |
 | MTP n=9 | 55.7 | — | 32k |
 | MTP n=9 + ngram-mod | 54.6 | 89.6-92.3 | 96k |
 | MTP n=12 + ngram-mod | 59.4 | 94.7-98.5 | 96k |
-| **… n-min 24, Q4_K_XL — this repo (champion)** | **59.7** | **148-163** | **96k (f16 KV)** |
+| **… n-min 24, Q4_K_XL — this repo (champion)** | **59.7 (stream events/s)** | **148-163 (stream events/s)** | **96k (f16 KV)** |
 | Q3_K_XL swap @ 128k (in 19:10Z, reverted 19:36Z) | 63-64 | 148-163 | 128k |
 | Q2_K_XL (rejected — see findings) | 54.7 | 134-153 | 128k |
 
@@ -118,9 +124,12 @@ time-per-task ladder in findings before picking a quant.
 
 ## Read the warm numbers honestly (three bands)
 
-- **Cold c30 59.7 tok/s** (63-64 on the Q3@128k option) — what a one-shot query actually
-  feels. ngram adds zero overhead when it misses; cold speed never regressed from stacking.
-- **Warm c30 148-163 tok/s — a repetitive-bench artifact.** ngram speculation replays
+- **Cold c30 59.7 stream events/s** (63-64 on the Q3@128k option) — what a one-shot query actually
+  feels — a stream-event rate, not a measured token rate: our bench counted streamed
+  content chunks, not tokens, and one chunk was never checked against one token. ngram
+  adds zero overhead when it misses; cold speed never regressed from stacking.
+- **Warm c30 148-163 stream events/s — a repetitive-bench artifact.** Same stream-event unit as the cold row, so also not a
+  measured token rate. ngram speculation replays
   repeated structure across back-to-back identical runs. In production it only appears
   on genuinely repetitive output: agent tool loops and echoed-file rewrites (72-133 tok/s).
 - **Real conversational traffic: 11-24 tok/s** — creative long-form ~11-14, a 2000-token
@@ -170,7 +179,7 @@ llama-server -m Qwen3.8-27B-UD-Q4_K_XL.gguf -ngl 99 -c 98304 \
   derived) and stack losslessly (target-verified) on top of MTP heads. Full flag map,
   including the dead ends (n16, n-min below 24, p-split), is in findings.
 - **The quant ladder is closed — on time-per-task, not decode tok/s**: Q3@128k decodes
-  faster than Q4 (63-64 vs 59.7 cold c30) yet completes identical correct tasks 35-50%
+  faster than Q4 (63-64 vs 59.7 cold c30, both stream events/s) yet completes identical correct tasks 35-50%
   slower, because its thinking is ~2x more verbose; Q2 loses on both axes (dequant
   kernel cost exceeds the bandwidth saved) with 30-40% more verbose thinking. Decode
   tok/s is not task latency — token verbosity dominates. Full three-quant table in findings.
@@ -225,14 +234,16 @@ Ran this stack (or a cousin of it) on your box? **PR or issue your row —
 it runs the cold/warm c30, time-per-task battery, quality suite, and rewrite
 bench, then prints a filled NUMBERS block you paste with your hardware line.
 
-| Hardware | Backend/build | Config | Cold tok/s | Warm tok/s | Real-traffic band | Time-per-task | Source |
+| Hardware | Backend/build | Config | Cold c30 (stream events/s) | Warm c30 (stream events/s) | Real-traffic band | Time-per-task | Source |
 |---|---|---|---|---|---|---|---|
-| AMD Ryzen AI Max+ 395 / Radeon 8060S (gfx1151, 64GB unified) | llama.cpp b10435-era (9d57ce4), ROCm/HIP | UD-Q4_K_XL @ 96k, `draft-mtp,ngram-mod` n12 / n-min 24, f16 KV | 59.7 (c30) | 148–163 (repetition-assisted — ngram replays repeat/pattern traffic) | prose 11–24, code 30–40 | 7.9–14.3 s/task, median 11.3 (5-task battery, n=3, thermal band) | [findings](docs/findings.md) |
-| AMD Ryzen AI Max+ 395 / Radeon 8060S (gfx1151, 64GB unified) | llama.cpp b10435-era (9d57ce4), ROCm/HIP | UD-Q3_K_XL @ 128k, same spec stack | 63–64 (c30) | 148–163 (repetition-assisted) | — | 10.6–16.1 s/task (n=2) — ~2x more verbose thinking loses the clock | [findings](docs/findings.md) |
+| AMD Ryzen AI Max+ 395 / Radeon 8060S (gfx1151, 64GB unified) | llama.cpp b10435-era (9d57ce4), ROCm/HIP | UD-Q4_K_XL @ 96k, `draft-mtp,ngram-mod` n12 / n-min 24, f16 KV | 59.7 (c30, stream events/s) | 148–163 (repetition-assisted, stream events/s — not a token rate — ngram replays repeat/pattern traffic) | prose 11–24, code 30–40 | 7.9–14.3 s/task, median 11.3 (5-task battery, n=3, thermal band) | [findings](docs/findings.md) |
+| AMD Ryzen AI Max+ 395 / Radeon 8060S (gfx1151, 64GB unified) | llama.cpp b10435-era (9d57ce4), ROCm/HIP | UD-Q3_K_XL @ 128k, same spec stack | 63–64 (c30, stream events/s) | 148–163 (repetition-assisted, stream events/s) | — | 10.6–16.1 s/task (n=2) — ~2x more verbose thinking loses the clock | [findings](docs/findings.md) |
 
 Label rules (kept in every row, ask the same of yours): warm c30 under ngram
 is a repetition artifact — the label is part of the number; n>=3 per arm in
-one thermal window; cold = first exposure.
+one thermal window; cold = first exposure; cold and warm c30 are stream-event rates
+(chunk counts over elapsed seconds), not measured token rates — carry that unit with
+the number wherever it is quoted.
 
 **NUMBERS template** (bench.sh prints most of it filled in):
 
@@ -240,8 +251,8 @@ one thermal window; cold = first exposure.
 hardware:
 backend/build:            (llama.cpp commit/build, backend, OS)
 config:                   (quant, ctx, spec flags, KV type)
-cold tok/s:               (c30, first exposure)
-warm tok/s:               (back-to-back repeats — label repetition-assisted)
+cold stream events/s:     (c30, first exposure — not a measured token rate)
+warm stream events/s:     (back-to-back repeats — label repetition-assisted; same unit as cold, not a measured token rate)
 real-traffic band:        (novel prose / code, same stack)
 time-per-task:            (tpt-battery, n>=3, one thermal window)
 source-link:
@@ -307,9 +318,11 @@ This recipe and every number in it stands on other people's work:
   makes Q4_K_XL the quality-per-token winner is their system.
 - **[Qwen team](https://huggingface.co/Qwen/Qwen3.8-27B)** — Qwen3.8-27B
   (Apache-2.0), the model under test.
-- **Unnamed public example (56 tok/s)** — best public figure we found for
-  this class (a Qwen3.6-27B run at 56 tok/s). The original post was not
-  re-located on 2026-08-15, so it stays unlabeled; no URL.
+- **Unnamed public example (56 tok/s)** — the public example we found for
+  this class (a Qwen3.6-27B run quoted at 56 tok/s). The original post was not
+  re-located on 2026-08-15, so it stays unlabeled; no URL. Its unit was never
+  verified either, so it is not comparable with our c30 stream-event rates and
+  we make no frontier claim against it.
 - **Skill authors whose thinking-style prompts Wave 2 fused and measured** —
   caveman origin: [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman)
   (skill MIT, (c) 2026 Julius Brussee; engine is separately BSL — unused here);

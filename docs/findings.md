@@ -7,7 +7,7 @@ completion tokens) showed thinking verbosity, not decode speed, decides task lat
 
 | | Q4_K_XL @ 96k (champion) | Q3_K_XL @ 128k | Q2_K_XL @ 128k |
 |---|---|---|---|
-| c30 tok/s (cold / warm) | 59.7 / 148-163 | 63-64 / 148-163 | 54.7 / 134-153 |
+| c30 stream events/s (cold / warm — not a measured token rate) | 59.7 / 148-163 | 63-64 / 148-163 | 54.7 / 134-153 |
 | GTT margin | 9.2GB | 11.3GB | 13.8GB |
 | quality suite | 6/6 | 6/6 | 5/6 |
 | agentic soak | 41/41 | — | 20/20 |
