@@ -184,7 +184,7 @@ llama-server -m Qwen3.8-27B-UD-Q4_K_XL.gguf -ngl 99 -c 98304 \
   kernel cost exceeds the bandwidth saved) with 30-40% more verbose thinking. Decode
   tok/s is not task latency — token verbosity dominates. Full three-quant table in findings.
 - **Neural drafters LOSE on this chip**: DSpark (1.36B) and DFlash drafters compete for the
-  same memory bus as the 27B verifier — acceptance 0.91-0.94 still nets ~32 tok/s. They're
+  same memory bus as the 27B verifier — acceptance 0.91-0.94 still nets ~32 stream events/s. They're
   compute-rich-GPU plays, not unified-memory plays.
 - **Do NOT**: `GGML_HIP_ROCWMMA_FATTN=ON` (-41% prefill on gfx1151, and prefill is our
   weak spot), Vulkan for spec-decode workloads (~half throughput vs ROCm here), KV-quant
