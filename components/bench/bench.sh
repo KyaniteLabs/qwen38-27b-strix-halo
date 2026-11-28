@@ -18,6 +18,12 @@
 #   4. rewrite bench x2             -> agent file-echo pattern (warm)
 # Then prints a filled numbers block — paste it into a "Post your numbers"
 # issue (NUMBERS-TEMPLATE) with your hardware line.
+#
+# Rate units: the throughput and rewrite runs above count streamed SSE content
+# chunks (data: events with non-empty delta.content), not tokens — one content
+# chunk is not one token; that was never measured on this stack. The count and
+# rewrite/echo rates are therefore content chunks/s: a chunk rate, not a
+# measured token rate.
 
 set -euo pipefail
 
@@ -74,16 +80,17 @@ cat <<EOF
 **Measured (UTC):** $TS
 **Port / stack:** $PORT (llama.cpp b10435+, ROCm, flags per README quickstart)
 
-**c30 throughput (tok/s):** cold = [run 1] · warm = [runs 2-3]  <- warm = ngram repetition artifact, label it
+**c30 throughput (content chunks/s):** cold = [run 1] · warm = [runs 2-3]  <- warm = ngram repetition artifact, label it
 **time-per-task (x3):** [s/task @ tokens, per run]
 **quality suite:** [n]/6
-**rewrite/echo (warm):** [tok/s, run 1 / run 2]
+**rewrite/echo (warm):** [content chunks/s, run 1 / run 2]
 **hardware:** [APU / memory / clocks]
 **notes:** [anything unusual — thermal, background load, different flags]
 ---8<---
 
 Reference bands on our box (champion, 2026-08-15): c30 59.7 cold / 148-163
-warm-artifact / real prose 11-24; tpt 7.6-7.7s @ ~170 tok; rewrite 72-133.
+warm-artifact, both content chunks/s; real prose 11-24; tpt 7.6-7.7s @ ~170 tok;
+rewrite 72-133 content chunks/s.
 Outside our bands is a valid result — post it anyway; outliers get published
 as data, not arguments.
 EOF

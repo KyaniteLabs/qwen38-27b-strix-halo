@@ -1,9 +1,13 @@
 import json, time, urllib.request, sys
 
 # qwen27-bench.py [prompt] [port] — streamed count-to-30 throughput bench
-# (1 content chunk == 1 token). Default port 46377 = production; the ledger's
+# (NOT 1 chunk == 1 token: never measured on this stack; one chunk can carry
+# several tokens). Default port 46377 = production; the ledger's
 # test-server runs used 46381. Run 3x back-to-back: run 1 is cold, runs 2-3
 # show the ngram warm effect. Acceptance/mean-len come from the server journal.
+# "content speed" is content chunks/s: SSE data: events with non-empty
+# delta.content, first to last. It is a content-chunk rate, not a measured
+# token rate.
 prompt = sys.argv[1] if len(sys.argv) > 1 else "Count from 1 to 30, comma separated, nothing else."
 PORT = sys.argv[2] if len(sys.argv) > 2 else "46377"
 body = json.dumps({"messages": [{"role": "user", "content": prompt}], "max_tokens": 250, "stream": True}).encode()
@@ -35,4 +39,4 @@ span = (last - first) if (last and first and last > first) else 0
 first = first if first is not None else 0.0
 last = last if last is not None else 0.0
 print(f"reasoning chunks: {nreason}  content chunks: {n}  first content: {first:.2f}s  "
-      f"total: {last:.2f}s  content speed: {(n/span if span else 0):.1f} tok/s")
+      f"total: {last:.2f}s  content speed: {(n/span if span else 0):.1f} content chunks/s (first-to-last content chunk; NOT tok/s)")

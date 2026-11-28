@@ -1,6 +1,8 @@
 # juice-mkrewrite.py — writes the 150-handler rewrite prompt to /tmp.
 # Pair with the throughput bench to reproduce the ledger's rewrite numbers
-# (72-133 tok/s on the champion stack vs ~42 mtp-only):
+# (72-133 content chunks/s on the champion stack vs ~42 mtp-only — a
+# content-chunk rate from the throughput bench, not tok/s: one content
+# chunk is not one token, never measured on this stack):
 #   python3 juice-mkrewrite.py
 #   python3 qwen27-bench.py "$(cat /tmp/juice-rewrite-prompt.txt)" [port]
 lines = []
