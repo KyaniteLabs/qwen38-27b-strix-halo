@@ -7,7 +7,7 @@ completion tokens) showed thinking verbosity, not decode speed, decides task lat
 
 | | Q4_K_XL @ 96k (champion) | Q3_K_XL @ 128k | Q2_K_XL @ 128k |
 |---|---|---|---|
-| c30 tok/s (cold / warm) | 59.7 / 148-163 | 63-64 / 148-163 | 54.7 / 134-153 |
+| c30 content chunks/s (cold / warm — not a measured token rate) | 59.7 / 148-163 | 63-64 / 148-163 | 54.7 / 134-153 |
 | GTT margin | 9.2GB | 11.3GB | 13.8GB |
 | quality suite | 6/6 | 6/6 | 5/6 |
 | agentic soak | 41/41 | — | 20/20 |
@@ -16,7 +16,7 @@ completion tokens) showed thinking verbosity, not decode speed, decides task lat
 | draft acceptance (novel traffic) | 0.345 | 0.492 | 0.478 |
 
 - Q3's thinking runs ~2x more verbose on code/reasoning, so Q4 completes identical
-  correct tasks 35-50% faster despite lower decode tok/s. **Decode tok/s is not task
+  correct tasks 35-50% faster despite a lower decode rate (c30 content chunks/s). **Decode tok/s is not task
   latency; token verbosity dominates** — measure wall-clock per completed task, always.
 - Acceptance-collapse hypothesis FALSIFIED: Q3 novel-traffic acceptance (0.492) is
   HIGHER than Q4's (0.345). The revert is purely a verbosity/latency verdict, not a
@@ -31,8 +31,10 @@ completion tokens) showed thinking verbosity, not decode speed, decides task lat
   Q3@128k remains the documented context-hungry option when latency is not binding.
 
 ## Flag map: dead ends measured once, don't re-run (2026-08-15)
-- `--spec-draft-n-max 16`: code regresses to 21.3 tok/s (deep-draft waste returns). n12 is the peak.
-- `--spec-ngram-mod-n-min 12`: identical to 24 (warm 146.6/158.0 vs 148.0/157.6, mean-len 37.67 both) — 24 is the plateau.
+Unit note: the rate figures in this section are count-to-30 (c30) content-chunk rates —
+chunk counts over elapsed seconds, not measured token rates. Times in seconds are wall-clock.
+- `--spec-draft-n-max 16`: code regresses to 21.3 content chunks/s (deep-draft waste returns). n12 is the peak.
+- `--spec-ngram-mod-n-min 12`: identical to 24 (warm 146.6/158.0 vs 148.0/157.6, all content chunks/s, mean-len 37.67 both) — 24 is the plateau.
 - `--spec-draft-p-split 0`: zero effect (94.3/99.4 vs 94.7/98.5).
 - `-t 12` vs `-t 16`: identical — CPU threads are not the bottleneck at full GPU offload.
 - `-ub 2048`: prefill WORSE (45.2-46.3s vs 40.6-41.4s on a 16k prompt); `-ub 1024` identical to default.
@@ -66,11 +68,15 @@ section: single-run A/Bs carry variance — the sustained (n>=3) numbers are the
 - **Parallel-tool advertisement** (batch calls instead of serializing).
 
 ## Neural drafters lose on unified memory (2026-08-15, 4-arm A/B, mirror-validated)
+Unit note: the cold and warm figures in this section are count-to-30 (c30) content-chunk rates —
+chunk counts over elapsed seconds, not measured token rates.
 - DSpark 1.36B BF16 drafter (RadixArk, GGUF converted via patched convert_hf_to_gguf DSpark path): 32.6 cold / 150.9 warm vs champion 59.6/157.8-158.3 — loses everywhere.
-- Mechanism: drafter forward pass costs ~2.7GB reads on the SAME bus as the 27B verify pass; acceptance 0.91 x 7-len still nets ~32 tok/s. ngram drafts are free (prompt-derived) with len 37.7.
+- Mechanism: drafter forward pass costs ~2.7GB reads on the SAME bus as the 27B verify pass; acceptance 0.91 x 7-len still nets ~32 content chunks/s. ngram drafts are free (prompt-derived) with len 37.7.
 - Cross-gen DFlash (z-lab Qwen3.6 drafter, CPU-drafted, vs 3.8 target): 79.1 cold (+32% over champion cold) but acceptance 0.063 on creative; no warm value. Cold-start-helper curiosity only.
 
 ## Build/backend traps on gfx1151
+Unit note: figures marked TG c30 in this section are count-to-30 (c30) content-chunk rates —
+chunk counts over elapsed seconds, not measured token rates.
 - GGML_HIP_ROCWMMA_FATTN=ON: -41% prefill (llama.cpp #24437); the decode-at-depth gains don't matter for us because prefill is the weak spot — rebuild cancelled.
 - Vulkan RADV (same 9d57ce4 source, stacked n12/96k): cold 16k-prompt TTFT 55.5-56.1s vs ROCm 40.6-41.4s (-36% PP), TG c30 48.8/50.2 vs 94.7-98.5 (~half), code 15.9 vs 30-40, story 5.3 vs ~12. Community "Vulkan wins on gfx1151" does not hold for spec-decode workloads on this box.
 - KV-quant q8_0 + FA: load failure on ROCm builds of this era; K-only loads but saves ~1GB at -1.6% (pointless — context is nearly free).
